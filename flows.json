@@ -28,8 +28,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 140,
-        "y": 200,
+        "x": 120,
+        "y": 60,
         "wires": [
             [
                 "13f0234dc9488345"
@@ -48,8 +48,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 340,
-        "y": 200,
+        "x": 320,
+        "y": 60,
         "wires": []
     }
 ]
