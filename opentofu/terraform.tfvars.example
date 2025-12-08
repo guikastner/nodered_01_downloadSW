@@ -1,0 +1,7 @@
+# Exemplo de preenchimento; copie para terraform.tfvars e ajuste para seu ambiente
+container_name    = "node-red"
+host_port         = 1880
+data_dir_name     = "node-red"
+data_dir_base     = "/DATA/AppData" # change to a user-writable path
+node_red_image    = "nodered/node-red:4.1.2-22"
+custom_image_name = "node-red-custom:latest"
