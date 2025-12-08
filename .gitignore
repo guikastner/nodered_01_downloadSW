@@ -1,1 +1,16 @@
-*.backup
+# Terraform / OpenTofu local state and caches
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+*.tfplan
+*.tfplan.*
+
+# Local variable files (keep examples tracked)
+*.tfvars
+*.tfvars.json
+!*.tfvars.example
+!*.example
+opentofu/terraform.tfvars
+opentofu/terraform.tfvars.json
