@@ -75,7 +75,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1080,
+        "x": 1120,
         "y": 60,
         "wires": []
     },
@@ -165,7 +165,7 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "search results",
-        "func": "msg.payload = msg.payload.member\nmsg.loop = msg.loop + 1\nmsg.skip = msg.loop * msg.top\n\n\nlet length = msg.payload.length\nmsg.searchResults.push(...msg.payload);\n\n\nif (length === msg.top) {\n    msg.payload = msg.searchResults\n    delete msg.searchResults\n    delete msg.top\n    delete msg.skip\n    delete msg.loop\n    return [msg, null];\n} else {\n    return [null, msg];\n}",
+        "func": "msg.payload = msg.payload.member\nmsg.loop = msg.loop + 1\nmsg.skip = msg.loop * msg.top\n\n\nlet length = msg.payload.length\nmsg.searchResults.push(...msg.payload);\n\n\nif (msg.top == msg.payload.length) {\n    // loop finished → output 2\n    delete msg.searchResults\n    delete msg.top\n    delete msg.skip\n    delete msg.loop\n    return [null, msg];\n} else {\n    // continue → output 1\n    return [msg, null];\n}\n\n// if (length === msg.top) {\n//     msg.payload = msg.searchResults\n//     delete msg.searchResults\n//     delete msg.top\n//     delete msg.skip\n//     delete msg.loop\n//     return [msg, null];\n// } else {\n//     return [null, msg];\n// }",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -192,7 +192,7 @@
         "links": [
             "2fe22ba32280ce09"
         ],
-        "x": 1105,
+        "x": 1135,
         "y": 160,
         "wires": []
     },
@@ -246,7 +246,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 1040,
+        "x": 1060,
         "y": 100,
         "wires": [
             [
