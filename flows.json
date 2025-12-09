@@ -32,7 +32,7 @@
         "y": 60,
         "wires": [
             [
-                "13f0234dc9488345"
+                "a33ea497ee2beb18"
             ]
         ]
     },
@@ -51,5 +51,25 @@
         "x": 900,
         "y": 60,
         "wires": []
+    },
+    {
+        "id": "a33ea497ee2beb18",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "function 1",
+        "func": "msg.baseEngUrl = \"resources/v1/modeler/dseng\"\nmsg.searchEngitemUrl = msg.baseEngUrl + \"/dseng:EngItem/search\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 60,
+        "wires": [
+            [
+                "13f0234dc9488345"
+            ]
+        ]
     }
 ]
