@@ -38,6 +38,30 @@
         "CSRFHeader": "auto"
     },
     {
+        "id": "bfd75d32e7f130f7",
+        "type": "mongodb4-client",
+        "name": "mongodb",
+        "protocol": "mongodb",
+        "hostname": "mongodb",
+        "port": "",
+        "dbName": "uvwdownload",
+        "appName": "",
+        "authSource": "",
+        "authMechanism": "DEFAULT",
+        "tls": false,
+        "tlsCAFile": "",
+        "tlsCertificateKeyFile": "",
+        "tlsInsecure": false,
+        "connectTimeoutMS": "30000",
+        "socketTimeoutMS": "0",
+        "minPoolSize": "0",
+        "maxPoolSize": "100",
+        "maxIdleTimeMS": "0",
+        "uri": "",
+        "advanced": "{}",
+        "uriTabActive": "tab-uri-simple"
+    },
+    {
         "id": "96e3bb0421e97eea",
         "type": "inject",
         "z": "3d0fd32bf5b4de54",
@@ -200,7 +224,9 @@
         "z": "3d0fd32bf5b4de54",
         "name": "link out 2",
         "mode": "link",
-        "links": [],
+        "links": [
+            "dfd305579d407092"
+        ],
         "x": 1245,
         "y": 60,
         "wires": []
@@ -480,8 +506,7 @@
         "y": 60,
         "wires": [
             [
-                "0d0b0d0e4d1e6454",
-                "b6987e17e302cee3"
+                "0d0b0d0e4d1e6454"
             ]
         ]
     },
@@ -1122,8 +1147,64 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1310,
-        "y": 160,
+        "x": 740,
+        "y": 180,
         "wires": []
+    },
+    {
+        "id": "674d7728aebe781d",
+        "type": "mongodb4",
+        "z": "3d0fd32bf5b4de54",
+        "clientNode": "bfd75d32e7f130f7",
+        "mode": "collection",
+        "collection": "",
+        "operation": "",
+        "output": "forEach",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 570,
+        "y": 180,
+        "wires": [
+            [
+                "b6987e17e302cee3"
+            ]
+        ]
+    },
+    {
+        "id": "ffcfa55fd7d3e03e",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "function 2",
+        "func": "// Ensure payload is an array\nif (!Array.isArray(msg.payload)) {\n    node.error(\"Payload must be an array to insert into MongoDB\", msg);\n    return null;\n}\n\n// Create an array of MongoDB insert operations\nconst docs = msg.payload.map(item => {\n    // Clone item to avoid mutating original payload\n    const doc = { ...item };\n\n    // Set document _id to the item id value\n    if (doc.id) {\n        doc._id = doc.id;\n        delete doc.id; // Remove original id field if not needed separately\n    } else {\n        node.warn(\"Item without 'id' - a MongoDB generated _id will be used\");\n    }\n\n    return doc;\n});\n\n// Set the message correctly for MongoDB out node\nmsg.collection = \"ids\";   // Target collection\nmsg.payload = docs;       // Array of documents to insert\n\n// Set the operation\nmsg.operation = \"insertMany\"; // Use bulk insertion\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 180,
+        "wires": [
+            [
+                "674d7728aebe781d"
+            ]
+        ]
+    },
+    {
+        "id": "dfd305579d407092",
+        "type": "link in",
+        "z": "3d0fd32bf5b4de54",
+        "name": "link in 10",
+        "links": [
+            "0d0b0d0e4d1e6454"
+        ],
+        "x": 295,
+        "y": 180,
+        "wires": [
+            [
+                "ffcfa55fd7d3e03e"
+            ]
+        ]
     }
 ]
