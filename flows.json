@@ -63,23 +63,6 @@
         ]
     },
     {
-        "id": "13f0234dc9488345",
-        "type": "debug",
-        "z": "3d0fd32bf5b4de54",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1120,
-        "y": 60,
-        "wires": []
-    },
-    {
         "id": "a33ea497ee2beb18",
         "type": "function",
         "z": "3d0fd32bf5b4de54",
@@ -175,7 +158,7 @@
         "y": 60,
         "wires": [
             [
-                "13f0234dc9488345"
+                "0d0b0d0e4d1e6454"
             ],
             [
                 "417fbf07cc2ef5d0"
@@ -210,5 +193,70 @@
                 "9b78915051fe12e9"
             ]
         ]
+    },
+    {
+        "id": "0d0b0d0e4d1e6454",
+        "type": "link out",
+        "z": "3d0fd32bf5b4de54",
+        "name": "link out 2",
+        "mode": "link",
+        "links": [
+            "f0a1829ec191ca14"
+        ],
+        "x": 1085,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "f0a1829ec191ca14",
+        "type": "link in",
+        "z": "3d0fd32bf5b4de54",
+        "name": "link in 2",
+        "links": [
+            "0d0b0d0e4d1e6454"
+        ],
+        "x": 45,
+        "y": 200,
+        "wires": [
+            [
+                "bc0d693f26d1f20d"
+            ]
+        ]
+    },
+    {
+        "id": "bc0d693f26d1f20d",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "function 1",
+        "func": "// Ensure msg.payload is an array (input)\nif (!Array.isArray(msg.payload)) {\n    msg.payload = [];\n}\n\n// If msg.components does not exist yet, copy from msg.payload (only once)\nif (!Array.isArray(msg.components) || msg.components.length === 0) {\n    msg.components = Array.isArray(msg.payload) ? msg.payload : [];\n}\n\n// Base array for chunking\nconst items = Array.isArray(msg.components) ? msg.components : [];\n\n// Constant chunk size\nconst CHUNK_SIZE = 100;\n\n// Initialize chunk control variables only once\nif (typeof msg.chunkStep !== 'number') {\n    msg.chunkStep = CHUNK_SIZE;                       // chunk size\n}\nif (typeof msg.chunkTotal !== 'number') {\n    msg.chunkTotal = items.length > 0\n        ? Math.ceil(items.length / msg.chunkStep)     // total number of chunks\n        : 0;\n}\n\n// Update loop counter (1-based)\nif (typeof msg.loop === 'number') {\n    msg.loop = msg.loop + 1;  // next loop\n} else {\n    msg.loop = 1;             // first loop\n}\n\n// Calculate slice range for this loop\nconst start = (msg.loop - 1) * msg.chunkStep;\nconst end = start + msg.chunkStep;\n\n// Slice current chunk into msg.payload\nmsg.payload = items.slice(start, end);\n\n// Optional: flag to indicate if there are no more chunks\nmsg.isLastChunk = (msg.loop >= msg.chunkTotal) || (start >= items.length);\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 140,
+        "y": 200,
+        "wires": [
+            [
+                "aba37677a0f3edff"
+            ]
+        ]
+    },
+    {
+        "id": "aba37677a0f3edff",
+        "type": "debug",
+        "z": "3d0fd32bf5b4de54",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 300,
+        "y": 200,
+        "wires": []
     }
 ]
