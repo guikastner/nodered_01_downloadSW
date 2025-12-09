@@ -155,6 +155,26 @@
         "y": 60,
         "wires": [
             [
+                "1199ee81407a6d34"
+            ]
+        ]
+    },
+    {
+        "id": "1199ee81407a6d34",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "search results",
+        "func": "msg.payload = msg.payload.member\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 60,
+        "wires": [
+            [
                 "13f0234dc9488345"
             ]
         ]
