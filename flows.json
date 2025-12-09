@@ -359,7 +359,7 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "adjust",
-        "func": "// Adiciona cada item do chunk atual em msg.components\nmsg.payload.forEach(el => {\n    msg.componentsData.push(el);\n});\n\nif (msg.loop !== msg.chunkTotal) {\n    return [null, msg]; // Saída 2\n} else {\n    msg.payload = msg.componentsData\n    delete msg.componentsData\n    delete msg.top\n    delete msg.object\n    delete msg.topic\n    delete msg.loop\n    delete msg.chunkTotal\n    delete msg.chunkStep\n    delete msg.pp\n    delete msg.id\n    delete msg.url\n    delete msg._event\n    delete msg.components\n    return [msg, null]; // Saída 1\n}",
+        "func": "// Adiciona cada item do chunk atual em msg.components\nmsg.payload.forEach(el => {\n    msg.componentsData.push(el);\n});\n\nif (msg.loop !== msg.chunkTotal) {\n    return [null, msg]; // Saída 2\n} else {\n    msg.payload = msg.componentsData\n    delete msg.componentsData\n    delete msg.top\n    delete msg.object\n    delete msg.topic\n    delete msg.loop\n    delete msg.chunkTotal\n    delete msg.chunkStep\n    delete msg.pp\n    delete msg.id\n    delete msg.url\n    delete msg._event\n    delete msg.components\n    delete msg.isLastChunk\n    delete msg.statusCode\n    return [msg, null]; // Saída 1\n}",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
@@ -370,7 +370,8 @@
         "y": 200,
         "wires": [
             [
-                "aba37677a0f3edff"
+                "aba37677a0f3edff",
+                "9cce457aceb60d97"
             ],
             [
                 "d0ce3e67a275b072"
@@ -526,6 +527,33 @@
             [
                 "71ee224f889be0ae"
             ]
+        ]
+    },
+    {
+        "id": "9cce457aceb60d97",
+        "type": "link out",
+        "z": "3d0fd32bf5b4de54",
+        "name": "link out 5",
+        "mode": "link",
+        "links": [
+            "4d187380166cfc2f"
+        ],
+        "x": 1195,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "4d187380166cfc2f",
+        "type": "link in",
+        "z": "3d0fd32bf5b4de54",
+        "name": "link in 5",
+        "links": [
+            "9cce457aceb60d97"
+        ],
+        "x": 45,
+        "y": 340,
+        "wires": [
+            []
         ]
     }
 ]
