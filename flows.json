@@ -8,6 +8,36 @@
         "env": []
     },
     {
+        "id": "5f78e6dbea64c56b",
+        "type": "3dx-env-config",
+        "name": "imb",
+        "compassUrl": "https://r1132102846314-us1-compass.3dexperience.3ds.com:443/enovia",
+        "tenant": "R1132102846314",
+        "services": [],
+        "httpProxy": ""
+    },
+    {
+        "id": "1ac0af68f7dec634",
+        "type": "3dx-login-config",
+        "name": "gui kastner - non admin",
+        "twoFactorEnabled": "no"
+    },
+    {
+        "id": "9053791864526aac",
+        "type": "3dx-client-config",
+        "name": "imb",
+        "mode": "login",
+        "environment": "5f78e6dbea64c56b",
+        "agent": "",
+        "login": "1ac0af68f7dec634",
+        "batch": "",
+        "service": "space",
+        "serviceName": "",
+        "securityContextHeader": "manual",
+        "securityContextHeaderOverride": "VPLMProjectLeader.Company Name.Common Space",
+        "CSRFHeader": "auto"
+    },
+    {
         "id": "96e3bb0421e97eea",
         "type": "inject",
         "z": "3d0fd32bf5b4de54",
@@ -45,7 +75,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1060,
+        "x": 1160,
         "y": 60,
         "wires": []
     },
@@ -61,7 +91,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 300,
+        "x": 260,
         "y": 60,
         "wires": [
             [
@@ -81,7 +111,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 490,
+        "x": 430,
         "y": 60,
         "wires": [
             [
@@ -101,7 +131,27 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 700,
+        "x": 620,
+        "y": 60,
+        "wires": [
+            [
+                "9a4c5d6c990b0c96"
+            ]
+        ]
+    },
+    {
+        "id": "9a4c5d6c990b0c96",
+        "type": "3dx-request",
+        "z": "3d0fd32bf5b4de54",
+        "name": "",
+        "client": "9053791864526aac",
+        "responseType": "json",
+        "requestUrl": "",
+        "requestMethod": "GET",
+        "requestBody": "",
+        "errorOutput": "no",
+        "outputs": 1,
+        "x": 810,
         "y": 60,
         "wires": [
             [
