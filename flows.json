@@ -164,7 +164,7 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "search results",
-        "func": "msg.payload = msg.payload.member\nmsg.loop = msg.loop + 1\nmsg.skip = msg.loop * msg.top\n\n\nlet length = msg.payload.length\nmsg.searchResults.push(...msg.payload);\n\n\nif (length === msg.top) {\n    msg.payload = msg.searchResults\n    delete msg.searchResults\n    delete msg.top\n    delete msg.skip\n    delete msg.loop\n    return [msg, null];\n} else {\n    return [null, msg];\n}",
+        "func": "msg.payload = msg.payload.member\nmsg.loop = msg.loop + 1\nmsg.skip = msg.loop * msg.top\n\n\nlet length = msg.payload.length\nmsg.searchResults.push(...msg.payload);\n\n\nif (length == msg.top) {\n    msg.payload = msg.searchResults\n    delete msg.searchResults\n    delete msg.top\n    delete msg.skip\n    delete msg.loop\n    return [msg, null];\n} else {\n    return [null, msg];\n}",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
