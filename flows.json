@@ -281,7 +281,7 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "prepare call",
-        "func": "msg.object = msg.payload;\n\nreturn msg;",
+        "func": "msg.object = msg.payload;\n\nlet url = msg.payload.relativePath + \"?$mask=dsmveng:EngItemMask.Details\"\n\nmsg.payload = {\n    url: url\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -292,7 +292,7 @@
         "y": 200,
         "wires": [
             [
-                "71ee224f889be0ae"
+                "826bc48799e7bf36"
             ]
         ]
     },
@@ -342,12 +342,10 @@
         "timeout": "",
         "count": "",
         "reduceRight": false,
-        "x": 910,
+        "x": 950,
         "y": 200,
         "wires": [
-            [
-                "c78528409989d2ac"
-            ]
+            []
         ]
     },
     {
@@ -501,5 +499,62 @@
                 "4f44eac22755d248"
             ]
         ]
+    },
+    {
+        "id": "826bc48799e7bf36",
+        "type": "3dx-request",
+        "z": "3d0fd32bf5b4de54",
+        "name": "details",
+        "client": "9053791864526aac",
+        "responseType": "json",
+        "requestUrl": "",
+        "requestMethod": "",
+        "requestBody": "",
+        "errorOutput": "no",
+        "outputs": 1,
+        "x": 670,
+        "y": 200,
+        "wires": [
+            [
+                "41fbe07b49ade990"
+            ]
+        ]
+    },
+    {
+        "id": "41fbe07b49ade990",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "function 1",
+        "func": "msg.payload = msg.payload.member;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 200,
+        "wires": [
+            [
+                "71ee224f889be0ae",
+                "1769b6d0e7015ff2"
+            ]
+        ]
+    },
+    {
+        "id": "1769b6d0e7015ff2",
+        "type": "debug",
+        "z": "3d0fd32bf5b4de54",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 160,
+        "wires": []
     }
 ]
