@@ -635,7 +635,7 @@
         "id": "2b48fbae8eae6032",
         "type": "function",
         "z": "3d0fd32bf5b4de54",
-        "name": "prepare call - part",
+        "name": "prepare call - xpart",
         "func": "msg.object = msg.payload;\n\nlet title = msg.payload.name;\nlet revision = msg.payload.revision\nmsg.searchStr = '[ds6w:identifier]:\"' + title + '\" AND [ds6wg:revision]:\"' + revision + '\"';\n\nlet url = \"/resources/v1/modeler/dsxcad/dsxcad:Part/Search?$searchStr=\" + msg.searchStr + \"&?mask=dsmvxcad:xCADPartMask.Default\";\n\n\nmsg.payload = {\n    method: \"GET\",\n    url: url\n}\n\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -666,7 +666,7 @@
         "id": "4d576c5580280b6b",
         "type": "3dx-request",
         "z": "3d0fd32bf5b4de54",
-        "name": "details",
+        "name": "xcad",
         "client": "9053791864526aac",
         "responseType": "json",
         "requestUrl": "",
@@ -678,7 +678,7 @@
         "y": 360,
         "wires": [
             [
-                "3a292f379b0b8291"
+                "37a7bbee0359a8d8"
             ]
         ]
     },
@@ -719,8 +719,131 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 890,
+        "x": 1340,
         "y": 360,
         "wires": []
+    },
+    {
+        "id": "37a7bbee0359a8d8",
+        "type": "change",
+        "z": "3d0fd32bf5b4de54",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.member",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 860,
+        "y": 360,
+        "wires": [
+            [
+                "4d568be1310d50fb"
+            ]
+        ]
+    },
+    {
+        "id": "4d568be1310d50fb",
+        "type": "switch",
+        "z": "3d0fd32bf5b4de54",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "empty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1010,
+        "y": 360,
+        "wires": [
+            [
+                "2a7e120ff884fd06"
+            ],
+            [
+                "1f7699d50e7b29a5"
+            ]
+        ]
+    },
+    {
+        "id": "2a7e120ff884fd06",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "relativePathXcad",
+        "func": "let xcadPartRelativePath = \"/resources/v1/modeler/dsxcad/dsxcad:Part/\" + msg.object.id\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1170,
+        "y": 360,
+        "wires": [
+            [
+                "3a292f379b0b8291"
+            ]
+        ]
+    },
+    {
+        "id": "1f7699d50e7b29a5",
+        "type": "link out",
+        "z": "3d0fd32bf5b4de54",
+        "name": "link out 7",
+        "mode": "link",
+        "links": [
+            "8c141788c455cf71"
+        ],
+        "x": 1105,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "8c141788c455cf71",
+        "type": "link in",
+        "z": "3d0fd32bf5b4de54",
+        "name": "link in 6",
+        "links": [
+            "1f7699d50e7b29a5"
+        ],
+        "x": 425,
+        "y": 440,
+        "wires": [
+            [
+                "44fab2353c8d83a4"
+            ]
+        ]
+    },
+    {
+        "id": "44fab2353c8d83a4",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "prepare call - xpart",
+        "func": "msg.object = msg.payload;\n\nlet title = msg.payload.name;\nlet revision = msg.payload.revision\nmsg.searchStr = '[ds6w:identifier]:\"' + title + '\" AND [ds6wg:revision]:\"' + revision + '\"';\n\nlet url = \"/resources/v1/modeler/dsxcad/dsxcad:Part/Search?$searchStr=\" + msg.searchStr + \"&?mask=dsmvxcad:xCADPartMask.Default\";\n\n\nmsg.payload = {\n    method: \"GET\",\n    url: url\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 440,
+        "wires": [
+            []
+        ]
     }
 ]
