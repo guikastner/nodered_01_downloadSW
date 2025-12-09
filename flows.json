@@ -147,7 +147,7 @@
         "client": "9053791864526aac",
         "responseType": "json",
         "requestUrl": "",
-        "requestMethod": "GET",
+        "requestMethod": "",
         "requestBody": "",
         "errorOutput": "no",
         "outputs": 1,
