@@ -124,7 +124,7 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "search Query",
-        "func": "let searchString = '[ds6w:identifier]:\"prd*\"'\nlet top = msg.top\nlet skip = msg.skip\nlet mask = \"dsmveng:EngItemMask.Details\"\n\nlet url = msg.searchEngitemUrl + \"?$searchStr=\" + searchString \n// + \"&$top=\" + top + \"&$skip=\" + skip \n// + \"&$mask=\" + mask\n\nmsg.payload = {\n    url: url\n}\nreturn msg;",
+        "func": "// let searchString = '[ds6w:identifier]:\"prd*\"'\nlet searchString = \"teste\"\n\nlet top = msg.top\nlet skip = msg.skip\nlet mask = \"dsmveng:EngItemMask.Details\"\n\nlet url = msg.searchEngitemUrl + \"?$searchStr=\" + searchString \n// + \"&$top=\" + top + \"&$skip=\" + skip \n// + \"&$mask=\" + mask\n\nmsg.payload = {\n    url: url\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
