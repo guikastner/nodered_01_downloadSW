@@ -67,7 +67,7 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "urls",
-        "func": "msg.baseEngUrl = \"/resources/v1/modeler/dseng\"\nmsg.searchEngitemUrl = msg.baseEngUrl + \"/dseng:EngItem/search\"\nmsg.engPrefix = msg.baseEngUrl + \"/dseng:EngItem/\"\nreturn msg;",
+        "func": "msg.baseEngUrl = \"/resources/v1/modeler/dseng\"\nmsg.searchEngitemUrl = msg.baseEngUrl + \"/dseng:EngItem/search\"\nmsg.engPrefix = msg.baseEngUrl + \"/dseng:EngItem/\"\nmsg.source = \"https://r1132102846314-us1-compass.3dexperience.3ds.com:443/enovia\"\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
