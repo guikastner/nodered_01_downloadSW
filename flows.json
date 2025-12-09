@@ -1048,7 +1048,9 @@
         "type": "link in",
         "z": "3d0fd32bf5b4de54",
         "name": "link in 8",
-        "links": [],
+        "links": [
+            "24147ffb155239f9"
+        ],
         "x": 45,
         "y": 420,
         "wires": [
@@ -1063,7 +1065,9 @@
         "z": "3d0fd32bf5b4de54",
         "name": "link out 10",
         "mode": "link",
-        "links": [],
+        "links": [
+            "77d3bfa2a7e3e1de"
+        ],
         "x": 715,
         "y": 560,
         "wires": []
