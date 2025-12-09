@@ -150,13 +150,16 @@
         "requestUrl": "",
         "requestMethod": "",
         "requestBody": "",
-        "errorOutput": "no",
-        "outputs": 1,
+        "errorOutput": "yes",
+        "outputs": 2,
         "x": 810,
         "y": 60,
         "wires": [
             [
                 "1199ee81407a6d34"
+            ],
+            [
+                "6e67ecba4b4a71cf"
             ]
         ]
     },
@@ -194,6 +197,22 @@
         "statusType": "auto",
         "x": 750,
         "y": 160,
+        "wires": []
+    },
+    {
+        "id": "6e67ecba4b4a71cf",
+        "type": "debug",
+        "z": "3d0fd32bf5b4de54",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 980,
+        "y": 140,
         "wires": []
     }
 ]
