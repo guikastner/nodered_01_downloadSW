@@ -369,7 +369,8 @@
                 "aba37677a0f3edff"
             ],
             [
-                "d0ce3e67a275b072"
+                "d0ce3e67a275b072",
+                "06ae2042a090509d"
             ]
         ]
     },
@@ -523,5 +524,21 @@
                 "71ee224f889be0ae"
             ]
         ]
+    },
+    {
+        "id": "06ae2042a090509d",
+        "type": "debug",
+        "z": "3d0fd32bf5b4de54",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1110,
+        "y": 320,
+        "wires": []
     }
 ]
