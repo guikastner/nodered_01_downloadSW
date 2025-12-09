@@ -284,7 +284,7 @@
         "id": "2827620f289e3168",
         "type": "function",
         "z": "3d0fd32bf5b4de54",
-        "name": "function 2",
+        "name": "prepare call",
         "func": "msg.object = msg.payload;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -292,7 +292,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 520,
+        "x": 530,
         "y": 200,
         "wires": [
             [
@@ -358,7 +358,7 @@
         "id": "c78528409989d2ac",
         "type": "function",
         "z": "3d0fd32bf5b4de54",
-        "name": "function 3",
+        "name": "adjust",
         "func": "// Adiciona cada item do chunk atual em msg.components\nmsg.payload.forEach(el => {\n    msg.componentsData.push(el);\n});\n\nif (msg.loop !== msg.chunkTotal) {\n    return [null, msg]; // Saída 2\n} else {\n    msg.payload = msg.componentsData\n    delete msg.componentsData\n    delete msg.top\n    delete msg.object\n    delete msg.topic\n    delete msg.loop\n    delete msg.chunkTotal\n    delete msg.chunkStep\n    delete msg.pp\n    delete msg.id\n    delete msg.url\n    delete msg._event\n    delete msg.components\n    return [msg, null]; // Saída 1\n}",
         "outputs": 2,
         "timeout": 0,
@@ -366,7 +366,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1140,
+        "x": 1130,
         "y": 200,
         "wires": [
             [
