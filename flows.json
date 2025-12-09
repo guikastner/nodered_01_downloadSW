@@ -1159,7 +1159,7 @@
         "mode": "collection",
         "collection": "",
         "operation": "",
-        "output": "forEach",
+        "output": "toArray",
         "maxTimeMS": "0",
         "handleDocId": false,
         "name": "",
