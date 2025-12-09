@@ -158,7 +158,8 @@
         "y": 60,
         "wires": [
             [
-                "0d0b0d0e4d1e6454"
+                "0d0b0d0e4d1e6454",
+                "0d411f89e27bb7a9"
             ],
             [
                 "417fbf07cc2ef5d0"
@@ -299,5 +300,50 @@
                 "aba37677a0f3edff"
             ]
         ]
+    },
+    {
+        "id": "58fe8ce18cfc6126",
+        "type": "inject",
+        "z": "3d0fd32bf5b4de54",
+        "name": "fake search",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 300,
+        "wires": [
+            [
+                "bc0d693f26d1f20d"
+            ]
+        ]
+    },
+    {
+        "id": "0d411f89e27bb7a9",
+        "type": "debug",
+        "z": "3d0fd32bf5b4de54",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 20,
+        "wires": []
     }
 ]
