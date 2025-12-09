@@ -18,7 +18,9 @@ resource "docker_image" "node_red" {
     context    = path.module
     dockerfile = "${path.module}/Dockerfile"
     build_args = {
-      NODE_RED_BASE_IMAGE = var.node_red_image
+      NODE_RED_BASE_IMAGE  = var.node_red_image
+      ADMIN_PASSWORD_HASH  = bcrypt(var.admin_password)
+      VIEWER_PASSWORD_HASH = bcrypt(var.viewer_password)
     }
   }
 }

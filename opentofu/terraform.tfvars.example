@@ -5,3 +5,5 @@ data_dir_name     = "node-red"
 data_dir_base     = "/DATA/AppData" # change to a user-writable path
 node_red_image    = "nodered/node-red:4.1.2-22"
 custom_image_name = "node-red-custom:latest"
+admin_password    = "admin-change-me"
+viewer_password   = "viewer-change-me"

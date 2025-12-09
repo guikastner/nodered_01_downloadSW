@@ -33,3 +33,15 @@ variable "custom_image_name" {
   type        = string
   default     = "node-red-custom:latest"
 }
+
+variable "admin_password" {
+  description = "Senha em texto puro para o usuário admin do Node-RED (hash é gerado automaticamente)"
+  type        = string
+  sensitive   = true
+}
+
+variable "viewer_password" {
+  description = "Senha em texto puro para o usuário viewer do Node-RED (hash é gerado automaticamente)"
+  type        = string
+  sensitive   = true
+}
