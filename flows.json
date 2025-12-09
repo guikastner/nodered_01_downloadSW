@@ -192,8 +192,8 @@
         "links": [
             "2fe22ba32280ce09"
         ],
-        "x": 1135,
-        "y": 160,
+        "x": 1205,
+        "y": 120,
         "wires": []
     },
     {
@@ -225,7 +225,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1000,
+        "x": 1120,
         "y": 160,
         "wires": []
     },
@@ -246,8 +246,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 1060,
-        "y": 100,
+        "x": 1120,
+        "y": 120,
         "wires": [
             [
                 "417fbf07cc2ef5d0"
