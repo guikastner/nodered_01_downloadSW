@@ -146,7 +146,7 @@
         "z": "3d0fd32bf5b4de54",
         "name": "",
         "client": "9053791864526aac",
-        "responseType": "text",
+        "responseType": "json",
         "requestUrl": "",
         "requestMethod": "",
         "requestBody": "",
