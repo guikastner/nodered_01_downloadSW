@@ -719,7 +719,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1340,
+        "x": 1720,
         "y": 360,
         "wires": []
     },
@@ -784,7 +784,7 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "relativePathXcad",
-        "func": "let xcadPartRelativePath = \"/resources/v1/modeler/dsxcad/dsxcad:Part/\" + msg.object.id\nreturn msg;",
+        "func": "let xcadPartRelativePath = \"/resources/v1/modeler/dsxcad/dsxcad:Part/\" + msg.object.id\n\nmsg.object.xcadRelativePath = xcadPartRelativePath;\nmsg.object.xcadType = \"Part\";\n\nmsg.payload = msg.object;\n\ndelete msg.object;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -795,7 +795,7 @@
         "y": 360,
         "wires": [
             [
-                "3a292f379b0b8291"
+                "2a8fc356b32d99bd"
             ]
         ]
     },
@@ -820,7 +820,7 @@
         "links": [
             "1f7699d50e7b29a5"
         ],
-        "x": 425,
+        "x": 385,
         "y": 440,
         "wires": [
             [
@@ -832,18 +832,256 @@
         "id": "44fab2353c8d83a4",
         "type": "function",
         "z": "3d0fd32bf5b4de54",
-        "name": "prepare call - xpart",
-        "func": "msg.object = msg.payload;\n\nlet title = msg.payload.name;\nlet revision = msg.payload.revision\nmsg.searchStr = '[ds6w:identifier]:\"' + title + '\" AND [ds6wg:revision]:\"' + revision + '\"';\n\nlet url = \"/resources/v1/modeler/dsxcad/dsxcad:Part/Search?$searchStr=\" + msg.searchStr + \"&?mask=dsmvxcad:xCADPartMask.Default\";\n\n\nmsg.payload = {\n    method: \"GET\",\n    url: url\n}\n\n\nreturn msg;",
+        "name": "prepare call - xassembly",
+        "func": "msg.object = msg.payload;\n\nmsg.payload = \"/resources/v1/modeler/dsxcad/dsxcad:Product/search?$searchStr=\" + msg.searchStr +\n    \"&?mask=dsmvxcad:xCADProductMask.Default\";\n\nmsg.payload = {\n    method: \"GET\",\n    url: msg.payload\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 550,
+        "x": 530,
         "y": 440,
         "wires": [
-            []
+            [
+                "1507814b1679f649"
+            ]
         ]
+    },
+    {
+        "id": "1507814b1679f649",
+        "type": "3dx-request",
+        "z": "3d0fd32bf5b4de54",
+        "name": "xcad",
+        "client": "9053791864526aac",
+        "responseType": "json",
+        "requestUrl": "",
+        "requestMethod": "",
+        "requestBody": "",
+        "errorOutput": "no",
+        "outputs": 1,
+        "x": 710,
+        "y": 440,
+        "wires": [
+            [
+                "477fa6ce104a0f75"
+            ]
+        ]
+    },
+    {
+        "id": "477fa6ce104a0f75",
+        "type": "change",
+        "z": "3d0fd32bf5b4de54",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.member",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 860,
+        "y": 440,
+        "wires": [
+            [
+                "b4b7a93de000445e"
+            ]
+        ]
+    },
+    {
+        "id": "b4b7a93de000445e",
+        "type": "switch",
+        "z": "3d0fd32bf5b4de54",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "empty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1010,
+        "y": 440,
+        "wires": [
+            [
+                "7cacc8eedfc1b1fb"
+            ],
+            [
+                "283112c465f86629"
+            ]
+        ]
+    },
+    {
+        "id": "7cacc8eedfc1b1fb",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "relativePathXcad",
+        "func": "let xcadAssemblyRelativePath = \"/resources/v1/modeler/dsxcad/dsxcad:Product/\" + msg.object.id\n\nmsg.object.xcadRelativePath = xcadAssemblyRelativePath;\nmsg.object.xcadType = \"Product\";\n\nmsg.payload = msg.object;\n\ndelete msg.object;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1170,
+        "y": 440,
+        "wires": [
+            [
+                "074eb9bb81228660"
+            ]
+        ]
+    },
+    {
+        "id": "283112c465f86629",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "none",
+        "func": "msg.payload = \"\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1130,
+        "y": 480,
+        "wires": [
+            [
+                "6f9337ae58efa9aa"
+            ]
+        ]
+    },
+    {
+        "id": "2a8fc356b32d99bd",
+        "type": "join",
+        "z": "3d0fd32bf5b4de54",
+        "name": "",
+        "mode": "auto",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": "false",
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "x": 1410,
+        "y": 360,
+        "wires": [
+            [
+                "147c547267a0a76e"
+            ]
+        ]
+    },
+    {
+        "id": "074eb9bb81228660",
+        "type": "link out",
+        "z": "3d0fd32bf5b4de54",
+        "name": "link out 8",
+        "mode": "link",
+        "links": [
+            "c46bdbf1b8db7d96"
+        ],
+        "x": 1305,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "6f9337ae58efa9aa",
+        "type": "link out",
+        "z": "3d0fd32bf5b4de54",
+        "name": "link out 9",
+        "mode": "link",
+        "links": [
+            "c46bdbf1b8db7d96"
+        ],
+        "x": 1305,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "c46bdbf1b8db7d96",
+        "type": "link in",
+        "z": "3d0fd32bf5b4de54",
+        "name": "link in 7",
+        "links": [
+            "074eb9bb81228660",
+            "6f9337ae58efa9aa"
+        ],
+        "x": 1315,
+        "y": 320,
+        "wires": [
+            [
+                "2a8fc356b32d99bd"
+            ]
+        ]
+    },
+    {
+        "id": "147c547267a0a76e",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "adjust",
+        "func": "// Adiciona cada item do chunk atual em msg.components\nmsg.payload.forEach(el => {\n    msg.componentsData.push(el);\n});\n\nif (msg.loop !== msg.chunkTotal) {\n    return [null, msg]; // Saída 2\n} else {\n    msg.payload = msg.componentsData\n    delete msg.componentsData\n    delete msg.top\n    delete msg.object\n    delete msg.topic\n    delete msg.loop\n    delete msg.chunkTotal\n    delete msg.chunkStep\n    delete msg.pp\n    delete msg.id\n    delete msg.url\n    delete msg._event\n    delete msg.components\n    delete msg.isLastChunk\n    delete msg.statusCode\n    return [msg, null]; // Saída 1\n}",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1550,
+        "y": 360,
+        "wires": [
+            [
+                "3a292f379b0b8291"
+            ],
+            [
+                "24147ffb155239f9"
+            ]
+        ]
+    },
+    {
+        "id": "77d3bfa2a7e3e1de",
+        "type": "link in",
+        "z": "3d0fd32bf5b4de54",
+        "name": "link in 8",
+        "links": [
+            "24147ffb155239f9"
+        ],
+        "x": 45,
+        "y": 420,
+        "wires": [
+            [
+                "63fc3f3f2893c8b2"
+            ]
+        ]
+    },
+    {
+        "id": "24147ffb155239f9",
+        "type": "link out",
+        "z": "3d0fd32bf5b4de54",
+        "name": "link out 10",
+        "mode": "link",
+        "links": [
+            "77d3bfa2a7e3e1de"
+        ],
+        "x": 1655,
+        "y": 400,
+        "wires": []
     }
 ]
