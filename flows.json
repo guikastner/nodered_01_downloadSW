@@ -636,7 +636,7 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "prepare call - part",
-        "func": "msg.object = msg.payload;\n\nlet title = msg.payload.name;\nlet revision = msg.payload.revision\nmsg.searchStr = '[ds6w:identifier]:\"' + title + '\" AND [ds6wg:revision]:\"' + revision + '\"';\n\nlet url = \"/resources/v1/modeler/dsxcad/dsxcad:Part/Search?$searchStr=\" + msg.searchStr + \"&?mask=dsmvxcad:xCADPartMask.Default\";\n\n\nmsg.payload = {\n    method: \"GET\",\n    url: msg.payload\n}\n\n\nreturn msg;",
+        "func": "msg.object = msg.payload;\n\nlet title = msg.payload.name;\nlet revision = msg.payload.revision\nmsg.searchStr = '[ds6w:identifier]:\"' + title + '\" AND [ds6wg:revision]:\"' + revision + '\"';\n\nlet url = \"/resources/v1/modeler/dsxcad/dsxcad:Part/Search?$searchStr=\" + msg.searchStr + \"&?mask=dsmvxcad:xCADPartMask.Default\";\n\n\nmsg.payload = {\n    method: \"GET\",\n    url: url\n}\n\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
