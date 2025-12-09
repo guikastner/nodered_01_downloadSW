@@ -376,7 +376,7 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "function 3",
-        "func": "// Adiciona cada item do chunk atual em msg.components\nmsg.payload.forEach(el => {\n    msg.components.push(el);\n});\n\nif (msg.loop !== msg.chunkSize) {\n    return [null, msg]; // Saída 2\n} else {\n    delete msg.top\n    delete msg.topic\n    delete msg.loop\n    delete msg.chunkSize\n    delete msg.chunkStep\n    delete msg.pp\n    delete msg.id\n    delete msg.url\n    delete msg._event\n    msg.payload = msg.components\n    delete msg.components\n    return [msg, null]; // Saída 1\n}",
+        "func": "// Adiciona cada item do chunk atual em msg.components\nmsg.payload.forEach(el => {\n    msg.componentsData.push(el);\n});\n\nif (msg.loop !== msg.chunkSize) {\n    return [null, msg]; // Saída 2\n} else {\n    delete msg.top\n    delete msg.topic\n    delete msg.loop\n    delete msg.chunkSize\n    delete msg.chunkStep\n    delete msg.pp\n    delete msg.id\n    delete msg.url\n    delete msg._event\n    msg.payload = msg.components\n    delete msg.components\n    return [msg, null]; // Saída 1\n}",
         "outputs": 2,
         "timeout": 0,
         "noerr": 0,
