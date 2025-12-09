@@ -67,7 +67,7 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "urls",
-        "func": "msg.baseEngUrl = \"/resources/v1/modeler/dseng\"\nmsg.searchEngitemUrl = msg.baseEngUrl + \"/dseng:EngItem/search\"\nreturn msg;",
+        "func": "msg.baseEngUrl = \"/resources/v1/modeler/dseng\"\nmsg.searchEngitemUrl = msg.baseEngUrl + \"/dseng:EngItem/search\"\nmsg.engPrefix = msg.engUrlID + \"/dseng:EngItem/\"\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
