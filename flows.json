@@ -158,8 +158,8 @@
         "y": 60,
         "wires": [
             [
-                "0d0b0d0e4d1e6454",
-                "4f44eac22755d248"
+                "4f44eac22755d248",
+                "913d7e64cd70e3fb"
             ],
             [
                 "417fbf07cc2ef5d0"
@@ -481,5 +481,25 @@
         "x": 1080,
         "y": 20,
         "wires": []
+    },
+    {
+        "id": "913d7e64cd70e3fb",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "relativePath",
+        "func": "const prefix = msg.engPrefix || \"\";\n\nmsg.payload = msg.payload.map(item => {\n    if (item && typeof item === \"object\" && item.id) {\n        item.relativePath = prefix + item.id;\n    }\n    return item;\n});\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1130,
+        "y": 60,
+        "wires": [
+            [
+                "0d0b0d0e4d1e6454"
+            ]
+        ]
     }
 ]
