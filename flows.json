@@ -256,7 +256,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1100,
+        "x": 1300,
         "y": 160,
         "wires": []
     },
@@ -346,7 +346,7 @@
         "timeout": "",
         "count": "",
         "reduceRight": false,
-        "x": 810,
+        "x": 1010,
         "y": 200,
         "wires": [
             [
@@ -366,7 +366,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 940,
+        "x": 1140,
         "y": 200,
         "wires": [
             [
@@ -386,7 +386,7 @@
         "links": [
             "ea1aa3774330aecb"
         ],
-        "x": 1045,
+        "x": 1245,
         "y": 260,
         "wires": []
     },
@@ -460,7 +460,7 @@
         "links": [
             "4bb6eca68d048863"
         ],
-        "x": 845,
+        "x": 1045,
         "y": 240,
         "wires": [
             [
