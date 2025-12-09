@@ -11,7 +11,7 @@
         "id": "5f78e6dbea64c56b",
         "type": "3dx-env-config",
         "name": "imb",
-        "compassUrl": "https://r1132102846314-us1-compass.3dexperience.3ds.com:443/enovia",
+        "compassUrl": "https://r1132102846314-us1-compass.3dexperience.3ds.com/enovia",
         "tenant": "R1132102846314",
         "services": [],
         "httpProxy": ""
