@@ -656,7 +656,9 @@
         "z": "3d0fd32bf5b4de54",
         "name": "link out 6",
         "mode": "link",
-        "links": [],
+        "links": [
+            "c46bdbf1b8db7d96"
+        ],
         "x": 345,
         "y": 400,
         "wires": []
@@ -1005,7 +1007,8 @@
         "name": "link in 7",
         "links": [
             "074eb9bb81228660",
-            "6f9337ae58efa9aa"
+            "6f9337ae58efa9aa",
+            "e8181ffcd32b86b5"
         ],
         "x": 1315,
         "y": 320,
