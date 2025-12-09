@@ -75,7 +75,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1120,
+        "x": 1100,
         "y": 60,
         "wires": []
     },
@@ -143,22 +143,19 @@
         "id": "9a4c5d6c990b0c96",
         "type": "3dx-request",
         "z": "3d0fd32bf5b4de54",
-        "name": "",
+        "name": "search",
         "client": "9053791864526aac",
         "responseType": "json",
         "requestUrl": "",
         "requestMethod": "",
         "requestBody": "",
-        "errorOutput": "yes",
-        "outputs": 2,
-        "x": 790,
+        "errorOutput": "no",
+        "outputs": 1,
+        "x": 770,
         "y": 60,
         "wires": [
             [
                 "1199ee81407a6d34"
-            ],
-            [
-                "6e67ecba4b4a71cf"
             ]
         ]
     },
@@ -167,35 +164,51 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "search results",
-        "func": "msg.payload = msg.payload.member\nreturn msg;",
-        "outputs": 1,
+        "func": "msg.payload = msg.payload.member\nmsg.loop = msg.loop + 1\nmsg.skip = msg.loop * msg.top\n\n\nlet length = msg.payload.length\nmsg.searchResults.push(...msg.payload);\n\n\nif (length === msg.top) {\n    delete msg.top\n    delete msg.skip\n    delete msg.loop\n    return [msg, null];\n} else {\n    return [null, msg];\n}",
+        "outputs": 2,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 960,
+        "x": 920,
         "y": 60,
         "wires": [
             [
                 "13f0234dc9488345"
+            ],
+            [
+                "417fbf07cc2ef5d0"
             ]
         ]
     },
     {
-        "id": "6e67ecba4b4a71cf",
-        "type": "debug",
+        "id": "417fbf07cc2ef5d0",
+        "type": "link out",
         "z": "3d0fd32bf5b4de54",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 980,
-        "y": 140,
+        "name": "link out 1",
+        "mode": "link",
+        "links": [
+            "2fe22ba32280ce09"
+        ],
+        "x": 1045,
+        "y": 100,
         "wires": []
+    },
+    {
+        "id": "2fe22ba32280ce09",
+        "type": "link in",
+        "z": "3d0fd32bf5b4de54",
+        "name": "link in 1",
+        "links": [
+            "417fbf07cc2ef5d0"
+        ],
+        "x": 505,
+        "y": 100,
+        "wires": [
+            [
+                "9b78915051fe12e9"
+            ]
+        ]
     }
 ]
