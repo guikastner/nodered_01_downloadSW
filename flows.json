@@ -1156,7 +1156,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 580,
+        "x": 500,
         "y": 180,
         "wires": []
     },
@@ -1172,12 +1172,10 @@
         "maxTimeMS": "0",
         "handleDocId": false,
         "name": "",
-        "x": 390,
-        "y": 180,
+        "x": 1010,
+        "y": 260,
         "wires": [
-            [
-                "b6987e17e302cee3"
-            ]
+            []
         ]
     },
     {
@@ -1192,8 +1190,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 180,
-        "y": 180,
+        "x": 780,
+        "y": 260,
         "wires": [
             [
                 "674d7728aebe781d"
@@ -1212,7 +1210,7 @@
         "y": 180,
         "wires": [
             [
-                "ffcfa55fd7d3e03e"
+                "8da82c0459472b6b"
             ]
         ]
     },
@@ -1266,6 +1264,46 @@
         "y": 560,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "8da82c0459472b6b",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "Chunk",
+        "func": "// If msg.components does not exist yet, copy from msg.payload (only once)\nif (!Array.isArray(msg.components)) {\n    msg.components = Array.isArray(msg.payload) ? msg.payload : [];\n}\n\n// Base array for chunking\nconst items = Array.isArray(msg.components) ? msg.components : [];\n\n// Constant chunk size\nconst CHUNK_SIZE = 1;\n\n// Initialize chunk control variables only once\nif (typeof msg.chunkStep !== 'number') {\n    msg.chunkStep = CHUNK_SIZE;                       // chunk size\n}\nif (typeof msg.chunkTotal !== 'number') {\n    msg.chunkTotal = items.length > 0\n        ? Math.ceil(items.length / msg.chunkStep)     // total number of chunks\n        : 0;\n}\n\n// Update loop counter (1-based)\nif (typeof msg.loop === 'number') {\n    msg.loop = msg.loop + 1;  // next loop\n} else {\n    msg.loop = 1;             // first loop\n}\n\n// Calculate slice range for this loop\nconst start = (msg.loop - 1) * msg.chunkStep;\nconst end = start + msg.chunkStep;\n\n// Slice current chunk into msg.payload\nmsg.payload = items.slice(start, end);\n\n// Optional: flag to indicate if there are no more chunks\nmsg.isLastChunk = (msg.loop >= msg.chunkTotal) || (start >= items.length);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 170,
+        "y": 180,
+        "wires": [
+            [
+                "4fe0728c105e4cb8"
+            ]
+        ]
+    },
+    {
+        "id": "4fe0728c105e4cb8",
+        "type": "split",
+        "z": "3d0fd32bf5b4de54",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "property": "payload",
+        "x": 310,
+        "y": 180,
+        "wires": [
+            [
+                "b6987e17e302cee3"
+            ]
         ]
     },
     {
