@@ -1123,7 +1123,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1120,
+        "x": 1180,
         "y": 180,
         "wires": []
     },
@@ -1131,18 +1131,20 @@
         "id": "ffcfa55fd7d3e03e",
         "type": "function",
         "z": "3d0fd32bf5b4de54",
-        "name": "function 2",
-        "func": "// Ensure payload is an array\nif (!Array.isArray(msg.payload)) {\n    node.error(\"Payload must be an array of objects\", msg);\n    return null;\n}\n\n// Deep clone\nlet items = JSON.parse(JSON.stringify(msg.payload));\n\n// === Sanitize Mongo field names ===\nfunction sanitizeKeys(obj) {\n    if (Array.isArray(obj)) {\n        return obj.map(sanitizeKeys);\n    } else if (obj !== null && typeof obj === \"object\") {\n        const newObj = {};\n        for (let key in obj) {\n            let safeKey = key\n                .replace(/[:\\.]/g, \"_\")\n                .replace(/\\s+/g, \"_\")\n                .normalize(\"NFD\")\n                .replace(/[\\u0300-\\u036f]/g, \"\");\n\n            newObj[safeKey] = sanitizeKeys(obj[key]);\n        }\n        return newObj;\n    }\n    return obj;\n}\n\nitems = items.map(sanitizeKeys);\n\n// Convert id -> _id and remove invalid docs\nitems = items.map(doc => {\n    if (!doc.id) return null;\n    doc._id = doc.id;\n    delete doc.id;\n    return doc;\n}).filter(Boolean);\n\n// Prepare MongoDB insertMany\nmsg.collection = \"ids\";\nmsg.operation = \"insertMany\";\nmsg.payload = items;\n\nreturn msg;\n",
+        "name": "new",
+        "func": "// Ensure object exists in the message\nif (!msg.object || typeof msg.object !== \"object\") {\n    node.error(\"msg.object is missing or invalid\", msg);\n    return null;\n}\n\n// Prepare insertOne operation\nmsg.collection = \"ids\";           // Target MongoDB collection\nmsg.operation = \"insertOne\";      // Insert operation\nmsg.payload = msg.object;         // Insert this document as-is\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 780,
-        "y": 260,
+        "x": 870,
+        "y": 180,
         "wires": [
-            []
+            [
+                "e05de9aeda6aeb40"
+            ]
         ]
     },
     {
@@ -1270,6 +1272,53 @@
         "handleDocId": false,
         "name": "",
         "x": 590,
+        "y": 180,
+        "wires": [
+            [
+                "8daaa2641e7b6657"
+            ]
+        ]
+    },
+    {
+        "id": "8daaa2641e7b6657",
+        "type": "switch",
+        "z": "3d0fd32bf5b4de54",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "null"
+            },
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 730,
+        "y": 180,
+        "wires": [
+            [
+                "ffcfa55fd7d3e03e"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "e05de9aeda6aeb40",
+        "type": "mongodb4",
+        "z": "3d0fd32bf5b4de54",
+        "clientNode": "bfd75d32e7f130f7",
+        "mode": "collection",
+        "collection": "",
+        "operation": "",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 1030,
         "y": 180,
         "wires": [
             [
