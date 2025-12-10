@@ -1123,7 +1123,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1180,
+        "x": 1460,
         "y": 180,
         "wires": []
     },
@@ -1324,7 +1324,7 @@
         "y": 180,
         "wires": [
             [
-                "b6987e17e302cee3"
+                "af5ad6b5031bd20c"
             ]
         ]
     },
@@ -1345,6 +1345,83 @@
         "wires": [
             [
                 "e05de9aeda6aeb40"
+            ]
+        ]
+    },
+    {
+        "id": "af5ad6b5031bd20c",
+        "type": "join",
+        "z": "3d0fd32bf5b4de54",
+        "name": "",
+        "mode": "auto",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": "false",
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "x": 1170,
+        "y": 180,
+        "wires": [
+            [
+                "ad13855795e9c26d"
+            ]
+        ]
+    },
+    {
+        "id": "ad13855795e9c26d",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "adjust",
+        "func": "// Adiciona cada item do chunk atual em msg.components\n\nif (msg.loop !== msg.chunkTotal) {\n    return [null, msg]; // Saída 2\n} else {\n    msg.payload = msg.components\n    delete msg.top\n    delete msg.object\n    delete msg.topic\n    delete msg.loop\n    delete msg.chunkTotal\n    delete msg.chunkStep\n    delete msg.pp\n    delete msg.id\n    delete msg.url\n    delete msg._event\n    delete msg.components\n    delete msg.isLastChunk\n    delete msg.statusCode\n    return [msg, null]; // Saída 1\n}",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1290,
+        "y": 180,
+        "wires": [
+            [
+                "b6987e17e302cee3"
+            ],
+            [
+                "e329fc322853651d"
+            ]
+        ]
+    },
+    {
+        "id": "e329fc322853651d",
+        "type": "link out",
+        "z": "3d0fd32bf5b4de54",
+        "name": "link out 13",
+        "mode": "link",
+        "links": [
+            "bf805abffb0eb84e"
+        ],
+        "x": 1385,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "bf805abffb0eb84e",
+        "type": "link in",
+        "z": "3d0fd32bf5b4de54",
+        "name": "link in 9",
+        "links": [
+            "e329fc322853651d"
+        ],
+        "x": 55,
+        "y": 220,
+        "wires": [
+            [
+                "8da82c0459472b6b"
             ]
         ]
     },
