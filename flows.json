@@ -224,7 +224,9 @@
         "z": "3d0fd32bf5b4de54",
         "name": "link out 2",
         "mode": "link",
-        "links": [],
+        "links": [
+            "dfd305579d407092"
+        ],
         "x": 1245,
         "y": 60,
         "wires": []
@@ -1195,7 +1197,9 @@
         "type": "link in",
         "z": "3d0fd32bf5b4de54",
         "name": "link in 10",
-        "links": [],
+        "links": [
+            "0d0b0d0e4d1e6454"
+        ],
         "x": 55,
         "y": 180,
         "wires": [
