@@ -8,6 +8,14 @@
         "env": []
     },
     {
+        "id": "634613844859d35c",
+        "type": "tab",
+        "label": "Mongodb",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "5f78e6dbea64c56b",
         "type": "3dx-env-config",
         "name": "imb",
