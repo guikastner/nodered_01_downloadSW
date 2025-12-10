@@ -1354,7 +1354,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 300,
+        "x": 280,
         "y": 80,
         "wires": [
             [
@@ -1374,7 +1374,7 @@
         "maxTimeMS": "0",
         "handleDocId": false,
         "name": "",
-        "x": 450,
+        "x": 430,
         "y": 80,
         "wires": [
             [
@@ -1394,7 +1394,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 640,
+        "x": 580,
         "y": 80,
         "wires": []
     }
