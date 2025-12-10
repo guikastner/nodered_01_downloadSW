@@ -1156,27 +1156,9 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 740,
+        "x": 1060,
         "y": 180,
         "wires": []
-    },
-    {
-        "id": "674d7728aebe781d",
-        "type": "mongodb4",
-        "z": "3d0fd32bf5b4de54",
-        "clientNode": "bfd75d32e7f130f7",
-        "mode": "collection",
-        "collection": "",
-        "operation": "",
-        "output": "toArray",
-        "maxTimeMS": "0",
-        "handleDocId": false,
-        "name": "",
-        "x": 1010,
-        "y": 260,
-        "wires": [
-            []
-        ]
     },
     {
         "id": "ffcfa55fd7d3e03e",
@@ -1193,9 +1175,7 @@
         "x": 780,
         "y": 260,
         "wires": [
-            [
-                "674d7728aebe781d"
-            ]
+            []
         ]
     },
     {
@@ -1319,6 +1299,26 @@
         "finalize": "",
         "libs": [],
         "x": 460,
+        "y": 180,
+        "wires": [
+            [
+                "674d7728aebe781d"
+            ]
+        ]
+    },
+    {
+        "id": "674d7728aebe781d",
+        "type": "mongodb4",
+        "z": "3d0fd32bf5b4de54",
+        "clientNode": "bfd75d32e7f130f7",
+        "mode": "collection",
+        "collection": "",
+        "operation": "",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 610,
         "y": 180,
         "wires": [
             [
