@@ -1185,14 +1185,14 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "function 2",
-        "func": "// Ensure we only receive ONE document (from Split)\nif (Array.isArray(msg.payload)) {\n    node.error(\"Payload must be a single object after Split\", msg);\n    return null;\n}\n\n// Clone original document\nconst doc = { ...msg.payload };\n\n// Validate id\nif (!doc.id || typeof doc.id !== \"string\") {\n    node.error(\"Item has no valid 'id' field\", msg);\n    return null;\n}\n\n// Map id to _id for Mongo\ndoc._id = doc.id;\ndelete doc.id;\n\n// Build updateOne + upsert:true\nmsg.collection = \"ids\";\nmsg.operation = \"updateOne\";\nmsg.payload = {\n    query: { _id: doc._id },\n    update: { $set: doc },\n    options: { upsert: true }\n};\n\nreturn msg;\n",
+        "func": "// Ensure payload is an array\nif (!Array.isArray(msg.payload)) {\n    node.error(\"Payload must be an array of objects\", msg);\n    return null;\n}\n\n// Deep clone original array\nlet items = JSON.parse(JSON.stringify(msg.payload));\n\n// === Key sanitization (Mongo-safe keys) ===\nfunction sanitizeKeys(obj) {\n    if (Array.isArray(obj)) {\n        return obj.map(sanitizeKeys);\n    } else if (obj !== null && typeof obj === \"object\") {\n        const newObj = {};\n        for (let key in obj) {\n            // Remove colon, dot, spaces, accents\n            let safeKey = key\n                .replace(/[:\\.]/g, \"_\")\n                .replace(/\\s+/g, \"_\")\n                .normalize(\"NFD\")\n                .replace(/[\\u0300-\\u036f]/g, \"\");\n\n            newObj[safeKey] = sanitizeKeys(obj[key]);\n        }\n        return newObj;\n    }\n    return obj;\n}\n\nitems = items.map(sanitizeKeys);\n\n// Convert to updateBulk operations\nmsg.payload = items.map(doc => {\n    if (!doc.id) {\n        node.warn(\"Item without 'id' - will be ignored\");\n        return null;\n    }\n\n    const _id = doc.id;\n    delete doc.id;\n\n    return {\n        query: { _id },\n        update: { $set: doc },\n        options: { upsert: true }\n    };\n}).filter(Boolean);\n\n// Set MongoDB Out target collection\nmsg.collection = \"ids\";\n\n// Bulk operation: update if exists, insert otherwise\nmsg.operation = \"updateBulk\";\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 320,
+        "x": 180,
         "y": 180,
         "wires": [
             [
@@ -1212,7 +1212,7 @@
         "y": 180,
         "wires": [
             [
-                "a3a4336822fd67d9"
+                "ffcfa55fd7d3e03e"
             ]
         ]
     },
@@ -1248,26 +1248,6 @@
         "y": 480,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "a3a4336822fd67d9",
-        "type": "split",
-        "z": "3d0fd32bf5b4de54",
-        "name": "",
-        "splt": "\\n",
-        "spltType": "str",
-        "arraySplt": 1,
-        "arraySpltType": "len",
-        "stream": false,
-        "addname": "",
-        "property": "payload",
-        "x": 150,
-        "y": 180,
-        "wires": [
-            [
-                "ffcfa55fd7d3e03e"
-            ]
         ]
     },
     {
