@@ -1312,5 +1312,90 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "94e7ad4ea1b5e9c0",
+        "type": "inject",
+        "z": "634613844859d35c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 80,
+        "wires": [
+            [
+                "c77cc7f57bf96958"
+            ]
+        ]
+    },
+    {
+        "id": "c77cc7f57bf96958",
+        "type": "function",
+        "z": "634613844859d35c",
+        "name": "count all",
+        "func": "msg.collection = \"ids\";          // nome da collection\nmsg.operation = \"countDocuments\";\nmsg.payload = [{}];          // filtro vazio = conta todos\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 80,
+        "wires": [
+            [
+                "d762a168d76a822e"
+            ]
+        ]
+    },
+    {
+        "id": "d762a168d76a822e",
+        "type": "mongodb4",
+        "z": "634613844859d35c",
+        "clientNode": "bfd75d32e7f130f7",
+        "mode": "collection",
+        "collection": "",
+        "operation": "",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 450,
+        "y": 80,
+        "wires": [
+            [
+                "bf24d5ed72ec1242"
+            ]
+        ]
+    },
+    {
+        "id": "bf24d5ed72ec1242",
+        "type": "debug",
+        "z": "634613844859d35c",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 80,
+        "wires": []
     }
 ]
