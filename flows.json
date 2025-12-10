@@ -1156,7 +1156,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 500,
+        "x": 740,
         "y": 180,
         "wires": []
     },
@@ -1299,6 +1299,26 @@
         "addname": "",
         "property": "payload",
         "x": 310,
+        "y": 180,
+        "wires": [
+            [
+                "ee2493c6f381142b"
+            ]
+        ]
+    },
+    {
+        "id": "ee2493c6f381142b",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "find one",
+        "func": "// Ensure payload is a single object\nif (!msg.payload || typeof msg.payload !== \"object\" || Array.isArray(msg.payload)) {\n    node.error(\"Payload must be a single object\", msg);\n    return null;\n}\n\n// Clone to msg.object\nmsg.object = { ...msg.payload };\n\n// Move 'id' to '_id'\nif (msg.object.id) {\n    msg.object._id = msg.object.id;\n    delete msg.object.id;\n} else {\n    node.error(\"Object does not contain an 'id' field\", msg);\n    return null;\n}\n\n// Prepare query to check existence in MongoDB\nmsg.collection = \"ids\";\nmsg.operation = \"findOne\";  // find by _id\nmsg.payload = { _id: msg.object._id };\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
         "y": 180,
         "wires": [
             [
