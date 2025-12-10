@@ -1397,5 +1397,54 @@
         "x": 580,
         "y": 80,
         "wires": []
+    },
+    {
+        "id": "1a46d27df7eeda40",
+        "type": "inject",
+        "z": "634613844859d35c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 140,
+        "wires": [
+            [
+                "98fbaed776c7c173"
+            ]
+        ]
+    },
+    {
+        "id": "98fbaed776c7c173",
+        "type": "function",
+        "z": "634613844859d35c",
+        "name": "clear all",
+        "func": "msg.collection = \"ids\";      // sua collection\nmsg.operation = \"deleteMany\";\nmsg.payload = [{}];      // filtro vazio = apaga tudo\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 140,
+        "wires": [
+            [
+                "d762a168d76a822e"
+            ]
+        ]
     }
 ]
