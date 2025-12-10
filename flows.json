@@ -1333,7 +1333,7 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "upd",
-        "func": "// Ensure object exists in the message\nif (!msg.object || typeof msg.object !== \"object\") {\n    node.error(\"msg.object is missing or invalid\", msg);\n    return null;\n}\n\n// Prepare insertOne operation\nmsg.collection = \"ids\";           // Target MongoDB collection\nmsg.operation = \"insertOne\";      // Insert operation\nmsg.payload = msg.object;         // Insert this document as-is\n\nreturn msg;",
+        "func": "let doc = { ...msg.object };\n\n// Ensure we don't send _id inside $set\nlet id = doc._id;\ndelete doc._id;\n\n// Prepare updateOne operation\nmsg.collection = \"ids\";\nmsg.operation = \"updateOne\";\nmsg.payload = {\n    query: { _id: id },      // lookup by existing id\n    update: { $set: doc },   // update fields\n    options: { upsert: false } // do not create new record\n};\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
