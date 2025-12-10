@@ -1185,7 +1185,7 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "function 2",
-        "func": "// Clone payload (one item only)\nconst doc = { ...msg.payload };\n\n// Validate id\nif (!doc.id || typeof doc.id !== \"string\") {\n    node.error(\"Item has no valid 'id' field\", msg);\n    return null;\n}\n\n// Convert id → _id for MongoDB\ndoc._id = doc.id;\ndelete doc.id;\n\n// Prepare message for MongoDB insertOne\nmsg.collection = \"ids\";\nmsg.operation = \"insertOne\";\nmsg.payload = doc;\n\nreturn msg;\n",
+        "func": "// Clone current item coming from the Split node\nconst doc = { ...msg.payload };\n\n// Validate id\nif (!doc.id || typeof doc.id !== \"string\") {\n    node.error(\"Item has no valid 'id' field\", msg);\n    return null;\n}\n\n// Map id → _id for MongoDB _id index\ndoc._id = doc.id;\ndelete doc.id;\n\n// Prepare MongoDB upsert operation\nmsg.collection = \"ids\";\nmsg.operation = \"updateOne\";  // always update\nmsg.payload = {\n    query: { _id: doc._id },           // match by ID\n    update: { $set: doc },             // set all fields\n    options: { upsert: true }          // insert if not exists\n};\n\nreturn msg;\n\n\n// // Clone payload (one item only)\n// const doc = { ...msg.payload };\n\n// // Validate id\n// if (!doc.id || typeof doc.id !== \"string\") {\n//     node.error(\"Item has no valid 'id' field\", msg);\n//     return null;\n// }\n\n// // Convert id → _id for MongoDB\n// doc._id = doc.id;\n// delete doc.id;\n\n// // Prepare message for MongoDB insertOne\n// msg.collection = \"ids\";\n// msg.operation = \"insertOne\";\n// msg.payload = doc;\n\n// return msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
