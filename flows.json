@@ -1303,7 +1303,9 @@
             [
                 "ffcfa55fd7d3e03e"
             ],
-            []
+            [
+                "a541574a4853bee5"
+            ]
         ]
     },
     {
@@ -1323,6 +1325,26 @@
         "wires": [
             [
                 "b6987e17e302cee3"
+            ]
+        ]
+    },
+    {
+        "id": "a541574a4853bee5",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "upd",
+        "func": "// Ensure object exists in the message\nif (!msg.object || typeof msg.object !== \"object\") {\n    node.error(\"msg.object is missing or invalid\", msg);\n    return null;\n}\n\n// Prepare insertOne operation\nmsg.collection = \"ids\";           // Target MongoDB collection\nmsg.operation = \"insertOne\";      // Insert operation\nmsg.payload = msg.object;         // Insert this document as-is\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 220,
+        "wires": [
+            [
+                "e05de9aeda6aeb40"
             ]
         ]
     },
