@@ -57,9 +57,9 @@
         "minPoolSize": "0",
         "maxPoolSize": "100",
         "maxIdleTimeMS": "0",
-        "uri": "",
+        "uri": "mongodb://mongodb:27017",
         "advanced": "{}",
-        "uriTabActive": "tab-uri-simple"
+        "uriTabActive": "tab-uri-advanced"
     },
     {
         "id": "96e3bb0421e97eea",
@@ -1184,7 +1184,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 280,
+        "x": 320,
         "y": 180,
         "wires": [
             [
