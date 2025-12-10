@@ -486,7 +486,7 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "relativePath",
-        "func": "const prefix = msg.engPrefix || \"\";\n\nmsg.payload = msg.payload.map(item => {\n    if (item && typeof item === \"object\") {\n        item.relativePath = prefix + item.id;\n        item.source = msg.source;\n        delete item.cestamp;\n        delete item.created;\n        delete item.modified;\n        delete item.owner;\n        delete item.isManufacturable;\n        delete item.organization;\n    }\n    return item;\n});\n\nreturn msg;",
+        "func": "const prefix = msg.engPrefix || \"\";\n\nmsg.payload = msg.payload.map(item => {\n    if (item && typeof item === \"object\") {\n        item.relativePath = prefix + item.id;\n        item.source = msg.source;\n        item.up = \"new1\"\n        delete item.cestamp;\n        delete item.created;\n        delete item.modified;\n        delete item.owner;\n        delete item.isManufacturable;\n        delete item.organization;\n    }\n    return item;\n});\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
