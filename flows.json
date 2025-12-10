@@ -274,23 +274,6 @@
         ]
     },
     {
-        "id": "aba37677a0f3edff",
-        "type": "debug",
-        "z": "3d0fd32bf5b4de54",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 520,
-        "y": 1080,
-        "wires": []
-    },
-    {
         "id": "38f4ad96eb90476d",
         "type": "split",
         "z": "3d0fd32bf5b4de54",
@@ -514,8 +497,7 @@
         "y": 60,
         "wires": [
             [
-                "0d0b0d0e4d1e6454",
-                "1d8cf716225fe4ed"
+                "0d0b0d0e4d1e6454"
             ]
         ]
     },
@@ -1129,22 +1111,6 @@
         "wires": []
     },
     {
-        "id": "5fbcfdaa54965cba",
-        "type": "link in",
-        "z": "3d0fd32bf5b4de54",
-        "name": "link in 9",
-        "links": [
-            "e87e1fd57e2cefea"
-        ],
-        "x": 405,
-        "y": 1080,
-        "wires": [
-            [
-                "aba37677a0f3edff"
-            ]
-        ]
-    },
-    {
         "id": "b6987e17e302cee3",
         "type": "debug",
         "z": "3d0fd32bf5b4de54",
@@ -1153,10 +1119,11 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1060,
+        "x": 1120,
         "y": 180,
         "wires": []
     },
@@ -1193,22 +1160,6 @@
                 "8da82c0459472b6b"
             ]
         ]
-    },
-    {
-        "id": "1d8cf716225fe4ed",
-        "type": "debug",
-        "z": "3d0fd32bf5b4de54",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1250,
-        "y": 120,
-        "wires": []
     },
     {
         "id": "0ce1fbe439a88ec9",
@@ -1298,7 +1249,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 460,
+        "x": 440,
         "y": 180,
         "wires": [
             [
@@ -1318,7 +1269,7 @@
         "maxTimeMS": "0",
         "handleDocId": false,
         "name": "",
-        "x": 610,
+        "x": 590,
         "y": 180,
         "wires": [
             [
