@@ -1146,7 +1146,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 740,
+        "x": 880,
         "y": 180,
         "wires": []
     },
@@ -1162,11 +1162,11 @@
         "maxTimeMS": "0",
         "handleDocId": false,
         "name": "",
-        "x": 570,
+        "x": 470,
         "y": 180,
         "wires": [
             [
-                "b6987e17e302cee3"
+                "abf4b1b11d51bcce"
             ]
         ]
     },
@@ -1175,14 +1175,14 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "function 2",
-        "func": "// Ensure the first message initializes the batch\nif (!msg.originalData) {\n    if (!Array.isArray(msg.payload)) {\n        node.error(\"First payload must be an array\", msg);\n        return null;\n    }\n\n    // Clone the original array into a persistent property\n    msg.originalData = [...msg.payload];\n    msg.batchIndex = 0;\n}\n\n// If all items are processed, stop.\nif (msg.batchIndex >= msg.originalData.length) {\n    node.status({ text: \"Completed\" });\n    return null;\n}\n\n// Pick one document from the array\nconst item = msg.originalData[msg.batchIndex];\nmsg.batchIndex++;\n\n// Clone to avoid mutation\nconst doc = { ...item };\n\n// Map id → _id\nif (doc.id) {\n    doc._id = doc.id;\n    delete doc.id;\n}\n\n// Prepare Mongo insertOne\nmsg.collection = \"ids\";\nmsg.operation = \"insertOne\";\nmsg.payload = doc;\n\nnode.status({\n    text: `Inserted ${msg.batchIndex}/${msg.originalData.length}`\n});\n\nreturn msg;\n",
+        "func": "// Clone payload (one item only)\nconst doc = { ...msg.payload };\n\n// Validate id\nif (!doc.id || typeof doc.id !== \"string\") {\n    node.error(\"Item has no valid 'id' field\", msg);\n    return null;\n}\n\n// Convert id → _id for MongoDB\ndoc._id = doc.id;\ndelete doc.id;\n\n// Prepare message for MongoDB insertOne\nmsg.collection = \"ids\";\nmsg.operation = \"insertOne\";\nmsg.payload = doc;\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 160,
+        "x": 280,
         "y": 180,
         "wires": [
             [
@@ -1200,7 +1200,7 @@
         "y": 180,
         "wires": [
             [
-                "ffcfa55fd7d3e03e"
+                "a3a4336822fd67d9"
             ]
         ]
     },
@@ -1219,5 +1219,68 @@
         "x": 1250,
         "y": 120,
         "wires": []
+    },
+    {
+        "id": "0ce1fbe439a88ec9",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "function 3",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 60,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a3a4336822fd67d9",
+        "type": "split",
+        "z": "3d0fd32bf5b4de54",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "property": "payload",
+        "x": 150,
+        "y": 180,
+        "wires": [
+            [
+                "ffcfa55fd7d3e03e"
+            ]
+        ]
+    },
+    {
+        "id": "abf4b1b11d51bcce",
+        "type": "join",
+        "z": "3d0fd32bf5b4de54",
+        "name": "",
+        "mode": "auto",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": "false",
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "x": 650,
+        "y": 180,
+        "wires": [
+            [
+                "b6987e17e302cee3"
+            ]
+        ]
     }
 ]
