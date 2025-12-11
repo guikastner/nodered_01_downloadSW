@@ -1590,7 +1590,7 @@
         "y": 460,
         "wires": [
             [
-                "f49db4b8c1d68388"
+                "6445fe4e850ba9e9"
             ]
         ]
     },
@@ -1606,9 +1606,34 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 550,
+        "x": 880,
         "y": 460,
         "wires": []
+    },
+    {
+        "id": "6445fe4e850ba9e9",
+        "type": "switch",
+        "z": "3d0fd32bf5b4de54",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 530,
+        "y": 460,
+        "wires": [
+            [
+                "f49db4b8c1d68388"
+            ]
+        ]
     },
     {
         "id": "94e7ad4ea1b5e9c0",
