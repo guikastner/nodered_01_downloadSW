@@ -119,7 +119,7 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "search Preparation",
-        "func": "msg.top = 1000\nmsg.skip = 0\nmsg.loop = 0\nmsg.searchResults = []\nreturn msg;",
+        "func": "msg.top = 100\nmsg.skip = 0\nmsg.loop = 0\nmsg.searchResults = []\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -170,7 +170,8 @@
         "y": 60,
         "wires": [
             [
-                "1199ee81407a6d34"
+                "1199ee81407a6d34",
+                "ac9701935b6757bb"
             ]
         ]
     },
@@ -186,8 +187,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 900,
-        "y": 60,
+        "x": 980,
+        "y": 100,
         "wires": [
             [
                 "913d7e64cd70e3fb"
@@ -206,8 +207,8 @@
         "links": [
             "2fe22ba32280ce09"
         ],
-        "x": 1085,
-        "y": 100,
+        "x": 1165,
+        "y": 140,
         "wires": []
     },
     {
@@ -216,7 +217,8 @@
         "z": "3d0fd32bf5b4de54",
         "name": "link in 1",
         "links": [
-            "417fbf07cc2ef5d0"
+            "417fbf07cc2ef5d0",
+            "9e64b361eda30b0c"
         ],
         "x": 485,
         "y": 100,
@@ -232,11 +234,9 @@
         "z": "3d0fd32bf5b4de54",
         "name": "link out 2",
         "mode": "link",
-        "links": [
-            "dfd305579d407092"
-        ],
-        "x": 1245,
-        "y": 60,
+        "links": [],
+        "x": 1325,
+        "y": 100,
         "wires": []
     },
     {
@@ -493,8 +493,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1110,
-        "y": 60,
+        "x": 1190,
+        "y": 100,
         "wires": [
             [
                 "0d0b0d0e4d1e6454"
@@ -1121,7 +1121,7 @@
         "finalize": "",
         "libs": [],
         "x": 870,
-        "y": 180,
+        "y": 280,
         "wires": [
             [
                 "e05de9aeda6aeb40"
@@ -1134,10 +1134,10 @@
         "z": "3d0fd32bf5b4de54",
         "name": "link in 10",
         "links": [
-            "0d0b0d0e4d1e6454"
+            "fc0588cdd88a2be7"
         ],
         "x": 55,
-        "y": 180,
+        "y": 280,
         "wires": [
             [
                 "8da82c0459472b6b"
@@ -1193,7 +1193,7 @@
         "finalize": "",
         "libs": [],
         "x": 170,
-        "y": 180,
+        "y": 280,
         "wires": [
             [
                 "4fe0728c105e4cb8"
@@ -1213,7 +1213,7 @@
         "addname": "",
         "property": "payload",
         "x": 310,
-        "y": 180,
+        "y": 280,
         "wires": [
             [
                 "ee2493c6f381142b"
@@ -1233,7 +1233,7 @@
         "finalize": "",
         "libs": [],
         "x": 440,
-        "y": 180,
+        "y": 280,
         "wires": [
             [
                 "674d7728aebe781d"
@@ -1253,7 +1253,7 @@
         "handleDocId": false,
         "name": "",
         "x": 590,
-        "y": 180,
+        "y": 280,
         "wires": [
             [
                 "8daaa2641e7b6657"
@@ -1279,7 +1279,7 @@
         "repair": false,
         "outputs": 2,
         "x": 730,
-        "y": 180,
+        "y": 280,
         "wires": [
             [
                 "ffcfa55fd7d3e03e"
@@ -1302,7 +1302,7 @@
         "handleDocId": false,
         "name": "",
         "x": 1030,
-        "y": 180,
+        "y": 280,
         "wires": [
             [
                 "af5ad6b5031bd20c"
@@ -1322,7 +1322,7 @@
         "finalize": "",
         "libs": [],
         "x": 870,
-        "y": 220,
+        "y": 320,
         "wires": [
             [
                 "e05de9aeda6aeb40",
@@ -1348,7 +1348,7 @@
         "count": "",
         "reduceRight": false,
         "x": 1170,
-        "y": 180,
+        "y": 280,
         "wires": [
             [
                 "ad13855795e9c26d"
@@ -1368,7 +1368,7 @@
         "finalize": "",
         "libs": [],
         "x": 1290,
-        "y": 180,
+        "y": 280,
         "wires": [
             [
                 "c5e68b57ba95ee27"
@@ -1388,7 +1388,7 @@
             "bf805abffb0eb84e"
         ],
         "x": 1385,
-        "y": 220,
+        "y": 320,
         "wires": []
     },
     {
@@ -1400,7 +1400,7 @@
             "e329fc322853651d"
         ],
         "x": 55,
-        "y": 220,
+        "y": 320,
         "wires": [
             [
                 "8da82c0459472b6b"
@@ -1420,7 +1420,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1440,
-        "y": 180,
+        "y": 280,
         "wires": []
     },
     {
@@ -1436,7 +1436,60 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1050,
-        "y": 300,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "ac9701935b6757bb",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "search results for mongo",
+        "func": "msg.payload = msg.payload.member\n\ndelete msg.searchResults\ndelete msg.top\ndelete msg.skip\ndelete msg.loop\ndelete msg.topic\ndelete msg.statusCode\ndelete msg._event\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 40,
+        "wires": [
+            [
+                "9ac72292f9b68b79"
+            ]
+        ]
+    },
+    {
+        "id": "9ac72292f9b68b79",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "relativePath",
+        "func": "const prefix = msg.engPrefix || \"\";\n\nconst status = {\n    properties: \"OK\",\n    cadFamily: \"\",\n    xcadInfo: \"\",\n    downloadStatus:\"\"\n}\n\nmsg.payload = msg.payload.map(item => {\n    if (item && typeof item === \"object\") {\n        item.relativePath = prefix + item.id;\n        item.source = msg.source;\n        item.status = status\n        delete item.cestamp;\n        delete item.created;\n        delete item.modified;\n        delete item.owner;\n        delete item.isManufacturable;\n        delete item.organization;\n    }\n    return item;\n});\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1210,
+        "y": 40,
+        "wires": [
+            [
+                "fc0588cdd88a2be7"
+            ]
+        ]
+    },
+    {
+        "id": "fc0588cdd88a2be7",
+        "type": "link out",
+        "z": "3d0fd32bf5b4de54",
+        "name": "link out 14",
+        "mode": "link",
+        "links": [
+            "dfd305579d407092"
+        ],
+        "x": 1325,
+        "y": 40,
         "wires": []
     },
     {
