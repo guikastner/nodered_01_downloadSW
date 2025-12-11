@@ -994,7 +994,7 @@
             "e8181ffcd32b86b5",
             "b3869100a6c6a1d1"
         ],
-        "x": 705,
+        "x": 655,
         "y": 960,
         "wires": [
             [
@@ -1654,11 +1654,6 @@
         "z": "3d0fd32bf5b4de54",
         "name": "",
         "rules": [
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
-            },
             {
                 "t": "delete",
                 "p": "topic",
