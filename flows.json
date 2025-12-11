@@ -1075,7 +1075,9 @@
         "z": "3d0fd32bf5b4de54",
         "name": "link out 12",
         "mode": "link",
-        "links": [],
+        "links": [
+            "4910093d594282ae"
+        ],
         "x": 1365,
         "y": 960,
         "wires": []
@@ -1774,6 +1776,22 @@
         "wires": [
             [
                 "2a8fc356b32d99bd"
+            ]
+        ]
+    },
+    {
+        "id": "4910093d594282ae",
+        "type": "link in",
+        "z": "3d0fd32bf5b4de54",
+        "name": "link in 12",
+        "links": [
+            "e87e1fd57e2cefea"
+        ],
+        "x": 155,
+        "y": 500,
+        "wires": [
+            [
+                "0fb6e2a4ab563674"
             ]
         ]
     },
