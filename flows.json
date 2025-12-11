@@ -244,7 +244,9 @@
         "type": "link in",
         "z": "3d0fd32bf5b4de54",
         "name": "link in 2",
-        "links": [],
+        "links": [
+            "2592145c4a95c7e5"
+        ],
         "x": 175,
         "y": 640,
         "wires": [
@@ -531,8 +533,7 @@
         "z": "3d0fd32bf5b4de54",
         "name": "link in 5",
         "links": [
-            "9cce457aceb60d97",
-            "2592145c4a95c7e5"
+            "9cce457aceb60d97"
         ],
         "x": 225,
         "y": 800,
@@ -1018,8 +1019,7 @@
         "y": 960,
         "wires": [
             [
-                "e87e1fd57e2cefea",
-                "7ca67c6423c7a055"
+                "e87e1fd57e2cefea"
             ],
             [
                 "24147ffb155239f9"
@@ -1642,7 +1642,7 @@
         "name": "link out 15",
         "mode": "link",
         "links": [
-            "4d187380166cfc2f"
+            "f0a1829ec191ca14"
         ],
         "x": 1125,
         "y": 380,
