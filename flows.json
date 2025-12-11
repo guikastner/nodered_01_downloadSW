@@ -951,7 +951,7 @@
         "timeout": "",
         "count": "",
         "reduceRight": false,
-        "x": 790,
+        "x": 1130,
         "y": 960,
         "wires": [
             [
@@ -995,11 +995,11 @@
             "6f9337ae58efa9aa",
             "b3869100a6c6a1d1"
         ],
-        "x": 665,
+        "x": 425,
         "y": 960,
         "wires": [
             [
-                "2a8fc356b32d99bd"
+                "a3a4599b19a73766"
             ]
         ]
     },
@@ -1015,7 +1015,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 930,
+        "x": 1250,
         "y": 960,
         "wires": [
             [
@@ -1052,8 +1052,8 @@
         "links": [
             "77d3bfa2a7e3e1de"
         ],
-        "x": 1035,
-        "y": 1000,
+        "x": 1365,
+        "y": 1020,
         "wires": []
     },
     {
@@ -1076,7 +1076,7 @@
         "name": "link out 12",
         "mode": "link",
         "links": [],
-        "x": 1065,
+        "x": 1365,
         "y": 960,
         "wires": []
     },
@@ -1565,15 +1565,15 @@
         "id": "092f5c29e3a51dc8",
         "type": "function",
         "z": "3d0fd32bf5b4de54",
-        "name": "list top 50",
-        "func": "// Define a coleção alvo\nmsg.collection = \"ids\";\n\n// Muda a operação para 'find' (que retorna múltiplos documentos)\nmsg.operation = \"find\";\n\n// Define a consulta (query)\nvar query = {\n    \"status.cadFamily\": \"\"\n};\n\n// Define as opções, incluindo o limite de 50 documentos\nvar options = {\n    \"limit\": 50\n};\n\n// A msg.payload deve ser um array contendo [query, options]\nmsg.payload = [query, options];\n\nreturn msg;\n",
+        "name": "list top 50 xcadInfo",
+        "func": "// Define a coleção alvo\nmsg.collection = \"ids\";\n\n// Muda a operação para 'find' (que retorna múltiplos documentos)\nmsg.operation = \"find\";\n\n// Define a consulta (query)\nvar query = {\n    \"status.xcadInfo\": \"\"\n};\n\n// Define as opções, incluindo o limite de 50 documentos\nvar options = {\n    \"limit\": 50\n};\n\n// A msg.payload deve ser um array contendo [query, options]\nmsg.payload = [query, options];\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 660,
+        "x": 690,
         "y": 460,
         "wires": [
             [
@@ -1609,7 +1609,7 @@
         "maxTimeMS": "0",
         "handleDocId": false,
         "name": "",
-        "x": 810,
+        "x": 870,
         "y": 460,
         "wires": [
             [
@@ -1626,7 +1626,7 @@
         "links": [
             "f0a1829ec191ca14"
         ],
-        "x": 1125,
+        "x": 1185,
         "y": 380,
         "wires": []
     },
@@ -1657,7 +1657,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1000,
+        "x": 1040,
         "y": 380,
         "wires": [
             [
@@ -1677,7 +1677,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1220,
+        "x": 1620,
         "y": 1060,
         "wires": []
     },
@@ -1689,11 +1689,91 @@
         "links": [
             "e8181ffcd32b86b5"
         ],
-        "x": 835,
+        "x": 1155,
         "y": 1000,
         "wires": [
             [
                 "147c547267a0a76e"
+            ]
+        ]
+    },
+    {
+        "id": "a3a4599b19a73766",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "xcadInfo",
+        "func": "let xcadInfo = {\n    xcadRelativePath: msg.payload.xcadRelativePath,\n    xcadType: msg.payload.xcadType\n}\n\nmsg.payload.status.xcadInfo = xcadInfo\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 960,
+        "wires": [
+            [
+                "f1563fcb9141a061"
+            ]
+        ]
+    },
+    {
+        "id": "f1563fcb9141a061",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "updxCad ",
+        "func": "msg.object = msg.payload\n\n// Get id and status\nconst id = msg.object._id;\nconst status = msg.object.status;\n\n\n// Prepare MongoDB4 updateOne (payload MUST be an array)\nmsg.collection = \"ids\";\nmsg.operation = \"updateOne\";\nmsg.payload = [\n    { _id: id },                   // filter\n    { $set: { status: status } },  // update\n    { upsert: false }              // options\n];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 960,
+        "wires": [
+            [
+                "3bf7c632a37cada2"
+            ]
+        ]
+    },
+    {
+        "id": "3bf7c632a37cada2",
+        "type": "mongodb4",
+        "z": "3d0fd32bf5b4de54",
+        "clientNode": "bfd75d32e7f130f7",
+        "mode": "collection",
+        "collection": "",
+        "operation": "",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 830,
+        "y": 960,
+        "wires": [
+            [
+                "34faafbbdab59316"
+            ]
+        ]
+    },
+    {
+        "id": "34faafbbdab59316",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "payload",
+        "func": "msg.payload = msg.object;\ndelete msg.object;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 960,
+        "wires": [
+            [
+                "2a8fc356b32d99bd"
             ]
         ]
     },
