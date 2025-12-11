@@ -119,7 +119,7 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "search Preparation",
-        "func": "msg.top = 100\nmsg.skip = 0\nmsg.loop = 0\nmsg.searchResults = []\nreturn msg;",
+        "func": "msg.top = 1000\nmsg.skip = 0\nmsg.loop = 0\nmsg.searchResults = []\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
