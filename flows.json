@@ -1647,7 +1647,7 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "list top 50",
-        "func": "msg.collection = \"ids\";\nmsg.operation = \"find\";\n\nmsg.payload = {\n    query: {\n        \"status.cadFamily\": \"\" },\n    options: {\n        limit: 50\n    }\n};\n\nreturn msg;\n",
+        "func": "msg.collection = \"ids\";\nmsg.operation = \"find\";\n\nmsg.payload = {\n    query: {\n        \"status.cadFamily\": \"\"\n    },\n    options: {\n        limit: 50\n    }\n};\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
