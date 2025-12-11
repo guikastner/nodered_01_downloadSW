@@ -1314,7 +1314,7 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "upd",
-        "func": "let id = msg.object._id;\n\nmsg.collection = \"ids\";\nmsg.operation = \"updateOne\";\nmsg.payload = {\n    query: { _id: id },\n    update: { $set: { status: msg.object.status } },\n    options: { upsert: false }\n};\n\nreturn msg;\n",
+        "func": "// Get id and status\nconst id = msg.object._id;\nconst status = msg.object.status;\n\n\n// Prepare MongoDB4 updateOne (payload MUST be an array)\nmsg.collection = \"ids\";\nmsg.operation = \"updateOne\";\nmsg.payload = [\n    { _id: id },                   // filter\n    { $set: { status: status } },  // update\n    { upsert: false }              // options\n];\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
