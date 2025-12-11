@@ -1658,27 +1658,7 @@
         "y": 460,
         "wires": [
             [
-                "3623156ffa90d3f1"
-            ]
-        ]
-    },
-    {
-        "id": "3623156ffa90d3f1",
-        "type": "mongodb4",
-        "z": "3d0fd32bf5b4de54",
-        "clientNode": "bfd75d32e7f130f7",
-        "mode": "collection",
-        "collection": "",
-        "operation": "",
-        "output": "toArray",
-        "maxTimeMS": "0",
-        "handleDocId": false,
-        "name": "",
-        "x": 810,
-        "y": 460,
-        "wires": [
-            [
-                "f49db4b8c1d68388"
+                "8ec091b0ca146907"
             ]
         ]
     },
@@ -1697,6 +1677,26 @@
         "x": 670,
         "y": 380,
         "wires": []
+    },
+    {
+        "id": "8ec091b0ca146907",
+        "type": "mongodb4",
+        "z": "3d0fd32bf5b4de54",
+        "clientNode": "bfd75d32e7f130f7",
+        "mode": "collection",
+        "collection": "",
+        "operation": "",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 790,
+        "y": 420,
+        "wires": [
+            [
+                "f49db4b8c1d68388"
+            ]
+        ]
     },
     {
         "id": "94e7ad4ea1b5e9c0",
