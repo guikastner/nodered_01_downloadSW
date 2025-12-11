@@ -1647,7 +1647,7 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "list top 50",
-        "func": "// Define a coleção alvo dinamicamente\nmsg.collection = \"ids\";\n\n// Define a operação a ser executada pelo nó MongoDB4\nmsg.operation = \"findOne\";\n\n// Define o critério de busca (query) para encontrar \"alguem\"\nvar query = {\"status.cadFamily\":\"ok\"};\n\n// Prepara a msg.payload como um array de argumentos para findOne(query)\nmsg.payload = [query];\n\nreturn msg;",
+        "func": "msg.collection = \"ids\";\nmsg.operation = \"findOne\";\n\nmsg.payload = {\n    query: { \"status.cadFamily\": \"\" }\n};\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
