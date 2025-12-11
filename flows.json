@@ -1606,7 +1606,7 @@
         "id": "1c50feb4eb23f9b9",
         "type": "function",
         "z": "634613844859d35c",
-        "name": "clear all",
+        "name": "find",
         "func": "msg.collection = \"ids\";\nmsg.operation = \"find\";\n\n// filter = {}  → traz todos\n// projection = { campos: 1 } → traz somente esses campos\nmsg.payload = [\n    {},\n    {\n        _id: 1,\n        relativePath: 1,\n        type: 1,\n        status: 1\n    }\n];\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
@@ -1614,7 +1614,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 280,
+        "x": 270,
         "y": 200,
         "wires": [
             [
