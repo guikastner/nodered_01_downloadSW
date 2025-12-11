@@ -1606,7 +1606,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 960,
+        "x": 1020,
         "y": 460,
         "wires": []
     },
@@ -1647,7 +1647,7 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "list top 50",
-        "func": "msg.collection = \"ids\";\nmsg.operation = \"findOne\";\n\nmsg.payload = {\n    query: { \"status.cadFamily\": \"\" }\n};\n\nreturn msg;\n",
+        "func": "// Define a coleção alvo\nmsg.collection = \"ids\";\n\n// Muda a operação para 'find' (que retorna múltiplos documentos)\nmsg.operation = \"find\";\n\n// Define a consulta (query)\nvar query = {\n    \"status.cadFamily\": \"\"\n};\n\n// Define as opções, incluindo o limite de 50 documentos\nvar options = {\n    \"limit\": 50\n};\n\n// A msg.payload deve ser um array contendo [query, options]\nmsg.payload = [query, options];\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1690,8 +1690,8 @@
         "maxTimeMS": "0",
         "handleDocId": false,
         "name": "",
-        "x": 790,
-        "y": 420,
+        "x": 830,
+        "y": 460,
         "wires": [
             [
                 "f49db4b8c1d68388"
