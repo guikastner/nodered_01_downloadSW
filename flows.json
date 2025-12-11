@@ -1325,8 +1325,7 @@
         "y": 320,
         "wires": [
             [
-                "e05de9aeda6aeb40",
-                "af017c2c84398b39"
+                "e05de9aeda6aeb40"
             ]
         ]
     },
@@ -1421,22 +1420,6 @@
         "statusType": "auto",
         "x": 1440,
         "y": 280,
-        "wires": []
-    },
-    {
-        "id": "af017c2c84398b39",
-        "type": "debug",
-        "z": "3d0fd32bf5b4de54",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1050,
-        "y": 400,
         "wires": []
     },
     {
@@ -1541,6 +1524,91 @@
                 "0d0b0d0e4d1e6454"
             ]
         ]
+    },
+    {
+        "id": "0fb6e2a4ab563674",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "function 2",
+        "func": "msg.collection = \"ids\";\nmsg.operation = \"count\";\nmsg.payload = { \"status.cadFamily\": \"\" };\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 460,
+        "wires": [
+            [
+                "6a4eb6e42765d9d6"
+            ]
+        ]
+    },
+    {
+        "id": "8384645919bd1436",
+        "type": "inject",
+        "z": "3d0fd32bf5b4de54",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 400,
+        "wires": [
+            [
+                "0fb6e2a4ab563674"
+            ]
+        ]
+    },
+    {
+        "id": "6a4eb6e42765d9d6",
+        "type": "mongodb4",
+        "z": "3d0fd32bf5b4de54",
+        "clientNode": "bfd75d32e7f130f7",
+        "mode": "collection",
+        "collection": "",
+        "operation": "",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 370,
+        "y": 460,
+        "wires": [
+            [
+                "f49db4b8c1d68388"
+            ]
+        ]
+    },
+    {
+        "id": "f49db4b8c1d68388",
+        "type": "debug",
+        "z": "3d0fd32bf5b4de54",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 460,
+        "wires": []
     },
     {
         "id": "94e7ad4ea1b5e9c0",
