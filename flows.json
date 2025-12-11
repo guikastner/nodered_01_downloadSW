@@ -1529,7 +1529,7 @@
         "id": "0fb6e2a4ab563674",
         "type": "function",
         "z": "3d0fd32bf5b4de54",
-        "name": "function 2",
+        "name": "how many",
         "func": "msg.collection = \"ids\";\nmsg.operation = \"count\";\nmsg.payload = { \"status.cadFamily\": \"\" };\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
@@ -1537,7 +1537,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 220,
+        "x": 230,
         "y": 460,
         "wires": [
             [
@@ -1586,7 +1586,7 @@
         "maxTimeMS": "0",
         "handleDocId": false,
         "name": "",
-        "x": 370,
+        "x": 390,
         "y": 460,
         "wires": [
             [
@@ -1606,7 +1606,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 880,
+        "x": 1060,
         "y": 460,
         "wires": []
     },
@@ -1622,12 +1622,38 @@
                 "t": "neq",
                 "v": "0",
                 "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 1,
+        "outputs": 2,
         "x": 530,
+        "y": 460,
+        "wires": [
+            [
+                "092f5c29e3a51dc8"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "092f5c29e3a51dc8",
+        "type": "function",
+        "z": "3d0fd32bf5b4de54",
+        "name": "list top 50",
+        "func": "msg.collection = \"ids\";\nmsg.operation = \"find\";\nmsg.payload = {\n    query: { \"status.cadFamily\": \"\" },\n    options: { limit: 50 }\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
         "y": 460,
         "wires": [
             [
