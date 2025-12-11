@@ -19,6 +19,8 @@ resource "docker_image" "node_red" {
     dockerfile = "${path.module}/Dockerfile"
     build_args = {
       NODE_RED_BASE_IMAGE = var.node_red_image
+      THREE_DX_USERNAME   = var.plat_username
+      THREE_DX_PASSPORT   = var.plat_passport
     }
   }
 }
@@ -27,6 +29,7 @@ resource "docker_container" "node_red" {
   name    = var.container_name
   image   = docker_image.node_red.image_id
   restart = "unless-stopped"
+  remove_volumes = var.remove_volumes_on_destroy # evita apagar o volume/bind no destroy quando false
 
   depends_on = [null_resource.ensure_data_dir]
 
@@ -39,5 +42,10 @@ resource "docker_container" "node_red" {
     target = "/data"
     source = local.host_data_path
     type   = "bind"
+  }
+
+  networks_advanced {
+    name    = docker_network.mongo_node_red.name
+    aliases = [var.container_name]
   }
 }

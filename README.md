@@ -7,11 +7,13 @@ Infrastructure-as-code to build a custom Node-RED Docker image and run it via Op
 - Installs extra Node-RED packages (axios, MySQL, MongoDB, PostgreSQL, FlowFuse dashboard, 3dxinterfaces).
 - Creates `/data` subfolders (PDF, Solidworks, CATIAV5, Excel) with open permissions and sets ownership to `node-red`.
 - Runs a container with bind mount to `/data/appdata/<your-folder>` and maps Node-RED port 1880 to a host port.
+- Creates/reuses a Docker network shared with an existing MongoDB container, then ensures a Mongo database and single app user/password exist.
 
 ## Files
 - `opentofu/main.tf`: Terraform and Docker provider setup.
 - `opentofu/variables.tf`: Input variables for container name, ports, paths, base image, custom image name.
 - `opentofu/node_red.tf`: Resources for data dir creation, image build, and container.
+- `opentofu/mongo.tf`: Shared network + MongoDB user/database setup against an existing Mongo container.
 - `opentofu/Dockerfile`: Custom Node-RED image build (includes extra npm packages and data dir setup).
 - `opentofu/terraform.tfvars.example`: Sample variable values to copy and customize.
 - `.gitignore`: Ignores `opentofu/terraform.tfvars`.
@@ -25,6 +27,15 @@ Infrastructure-as-code to build a custom Node-RED Docker image and run it via Op
 | data_dir_name      | string | `node-red`                     | Folder name appended to the base path for persistent data.                |
 | node_red_image     | string | `nodered/node-red:4.1.2-22`    | Base Node-RED image tag from Docker Hub.                                  |
 | custom_image_name  | string | `node-red-custom:latest`       | Name/tag for the locally built image.                                     |
+| mongo_network_name | string | `mongo-node-red`               | Docker network shared between MongoDB and Node-RED.                       |
+| existing_mongo_container | string | `mongodb`                | Name of the already-running MongoDB container to attach.                  |
+| mongo_username     | string | `node_red_user`                | App user created in MongoDB.                                              |
+| mongo_password     | string | `change-me`                    | Password for the app user.                                                |
+| mongo_database     | string | `node_red_db`                  | Database name for the app user.                                           |
+| mongo_auth_username| string | `""`                           | User with permission to create DB/user (leave empty if auth is disabled). |
+| mongo_auth_password| string | `""`                           | Password for creation user (leave empty if auth is disabled).             |
+| mongo_auth_db      | string | `admin`                        | Auth DB used when running mongosh.                                        |
+| remove_volumes_on_destroy | bool | `false`                   | Keep bind/volumes when destroying the container.                          |
 
 ## How to use
 1) Copy example vars and edit as needed:
@@ -40,9 +51,18 @@ tofu init
 ```
 3) Review plan and apply:
 ```sh
+# already inside opentofu:
 tofu plan
 tofu apply
+# ou a partir da raiz do repo:
+# tofu -chdir=opentofu plan
+# tofu -chdir=opentofu apply
 ```
+
+## Mongo setup notes
+- `existing_mongo_container` must point to a running Mongo container (default `mongodb`).
+- The plan attaches that container to the shared network (`mongo_network_name`) if not already attached.
+- A single user/database pair is created/updated using `mongo_username`, `mongo_password`, `mongo_database` via `mongosh` inside the Mongo container. If your Mongo exige autenticação, preencha `mongo_auth_username`, `mongo_auth_password`, `mongo_auth_db` (ex.: admin).
 
 ## Notes
 - To preload flows, uncomment COPY lines in `opentofu/Dockerfile` and provide `flows.json` / `flows_cred.json`.
