@@ -1314,7 +1314,7 @@
         "type": "function",
         "z": "3d0fd32bf5b4de54",
         "name": "upd",
-        "func": "// Clone the object\nlet doc = { ...msg.object };\n\n// Extract _id\nlet id = doc._id;\nif (!id) {\n    node.error(\"Missing _id in msg.object\", msg);\n    return null;\n}\n\n// Ensure status exists\nif (typeof doc.status === \"undefined\") {\n    node.error(\"msg.object.status is missing\", msg);\n    return null;\n}\n\n// Prepare updateOne to change ONLY 'status'\nmsg.collection = \"ids\";\nmsg.operation = \"updateOne\";\nmsg.payload = {\n    query: { _id: id },\n    update: { $set: { status: doc.status } },\n    options: { upsert: false }\n};\n\nreturn msg;\n",
+        "func": "let id = msg.object._id;\n\nmsg.collection = \"ids\";\nmsg.operation = \"updateOne\";\nmsg.payload = {\n    query: { _id: id },\n    update: { $set: { status: msg.object.status } },\n    options: { upsert: false }\n};\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
