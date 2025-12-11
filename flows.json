@@ -179,7 +179,7 @@
         "id": "1199ee81407a6d34",
         "type": "function",
         "z": "3d0fd32bf5b4de54",
-        "name": "search results",
+        "name": "search results top",
         "func": "msg.payload = msg.payload.member\nmsg.loop = msg.loop + 1\nmsg.skip = msg.loop * msg.top\n\n\nlet length = msg.payload.length\nmsg.searchResults.push(...msg.payload);\n\n\nif (msg.top == msg.payload.length) {\n    // loop finished → output 2\n    return [null, msg];\n} else {\n    // continue → output 1\n    msg.payload = msg.searchResults\n    delete msg.searchResults\n    delete msg.top\n    delete msg.skip\n    delete msg.loop\n    delete msg.topic\n    delete msg.statusCode\n    delete msg._event\n    return [msg, null];\n}",
         "outputs": 2,
         "timeout": 0,
@@ -187,7 +187,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 980,
+        "x": 990,
         "y": 100,
         "wires": [
             [
