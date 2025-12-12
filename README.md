@@ -36,6 +36,8 @@ Infrastructure-as-code to build a custom Node-RED Docker image and run it via Op
 | mongo_auth_password| string | `""`                           | Password for creation user (leave empty if auth is disabled).             |
 | mongo_auth_db      | string | `admin`                        | Auth DB used when running mongosh.                                        |
 | remove_volumes_on_destroy | bool | `false`                   | Keep bind/volumes when destroying the container.                          |
+| plat_username      | string | (none)                         | Username for the 3DEXPERIENCE credentials injected during image build.    |
+| plat_passport      | string | (none)                         | Password for the 3DEXPERIENCE credentials injected during image build.    |
 
 ## How to use
 1) Copy example vars and edit as needed:
