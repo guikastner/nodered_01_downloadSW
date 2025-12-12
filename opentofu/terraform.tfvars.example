@@ -14,3 +14,7 @@ mongo_auth_db            = "admin"
 node_red_image    = "nodered/node-red:4.1.2-22"
 custom_image_name = "node-red-custom:latest"
 remove_volumes_on_destroy = false
+
+# Credentials for the custom image build (3DEXPERIENCE)
+plat_username = "put-your-username"
+plat_passport = "put-your-password"

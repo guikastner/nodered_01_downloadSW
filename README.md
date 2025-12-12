@@ -54,15 +54,19 @@ tofu init
 # already inside opentofu:
 tofu plan
 tofu apply
-# ou a partir da raiz do repo:
+# or from the repo root:
 # tofu -chdir=opentofu plan
 # tofu -chdir=opentofu apply
 ```
 
+## Destroy
+- Normal destroy from `opentofu`: `tofu destroy`.
+- Because Mongo is external, if the network is still connected to the Mongo container when removing only the network (common if the state no longer has the attach null_resource), disconnect first: `docker network disconnect -f mongo-node-red mongodb`, then run `tofu destroy`.
+
 ## Mongo setup notes
 - `existing_mongo_container` must point to a running Mongo container (default `mongodb`).
 - The plan attaches that container to the shared network (`mongo_network_name`) if not already attached.
-- A single user/database pair is created/updated using `mongo_username`, `mongo_password`, `mongo_database` via `mongosh` inside the Mongo container. If your Mongo exige autenticação, preencha `mongo_auth_username`, `mongo_auth_password`, `mongo_auth_db` (ex.: admin).
+- A single user/database pair is created/updated using `mongo_username`, `mongo_password`, `mongo_database` via `mongosh` inside the Mongo container. If your Mongo requires authentication, fill `mongo_auth_username`, `mongo_auth_password`, `mongo_auth_db` (e.g., admin).
 
 ## Notes
 - To preload flows, uncomment COPY lines in `opentofu/Dockerfile` and provide `flows.json` / `flows_cred.json`.

@@ -5,6 +5,11 @@ resource "docker_network" "mongo_node_red" {
 resource "null_resource" "attach_mongo_to_network" {
   depends_on = [docker_network.mongo_node_red]
 
+  triggers = {
+    network   = var.mongo_network_name
+    container = var.existing_mongo_container
+  }
+
   provisioner "local-exec" {
     interpreter = ["/bin/bash", "-lc"]
     command     = <<-EOT
@@ -26,6 +31,23 @@ resource "null_resource" "attach_mongo_to_network" {
       fi
 
       docker network connect --alias "$${container}" "$${network}" "$${container}"
+    EOT
+  }
+
+  # Ao destruir, desconecta o Mongo da rede para permitir que o docker_network seja removido
+  provisioner "local-exec" {
+    when        = destroy
+    interpreter = ["/bin/bash", "-lc"]
+    command     = <<-EOT
+      set -eo pipefail
+
+      # Não podemos referenciar outros recursos em destroy; usamos valores guardados em triggers
+      network="${self.triggers.network}"
+      container="${self.triggers.container}"
+
+      if docker inspect "$${container}" >/dev/null 2>&1; then
+        docker network disconnect -f "$${network}" "$${container}" || true
+      fi
     EOT
   }
 }
